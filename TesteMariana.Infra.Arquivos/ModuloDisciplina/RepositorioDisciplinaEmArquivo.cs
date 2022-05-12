@@ -11,7 +11,7 @@ using TesteMariana.Infra.Arquivos.Compartilhado;
 
 namespace TesteMariana.Infra.Arquivos.ModuloDisciplina
 {
-    public class RepositorioDisciplinaEmArquivo : RepositorioEmArquivoBase<Disciplina>, IRepositorioDisciplina
+    public class RepositorioDisciplinaEmArquivo : RepositorioEmArquivoBase<Disciplina> , IRepositorioDisciplina
     {
         public RepositorioDisciplinaEmArquivo(DataContext dataContext) : base(dataContext)
         {

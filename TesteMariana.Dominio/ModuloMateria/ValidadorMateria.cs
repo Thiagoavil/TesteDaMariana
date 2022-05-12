@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TesteMariana.Dominio.ModuloMateria
 {
-    internal class ValidadorMateria : AbstractValidator<Materia>
+    public class ValidadorMateria : AbstractValidator<Materia>
     {
     }
 }

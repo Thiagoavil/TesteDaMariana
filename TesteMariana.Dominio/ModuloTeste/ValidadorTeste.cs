@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TesteMariana.Dominio.ModuloTeste
 {
-    internal class ValidadorTeste : AbstractValidator<Teste>
+    public class ValidadorTeste : AbstractValidator<Teste>
     {
     }
 }

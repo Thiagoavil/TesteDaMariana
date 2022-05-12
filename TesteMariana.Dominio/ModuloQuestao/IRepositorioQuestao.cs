@@ -7,7 +7,7 @@ using TesteMariana.Dominio.Compartilhado;
 
 namespace TesteMariana.Dominio.ModuloQuestao
 {
-    internal interface IRepositorioQuestao :IRepositorio<Questao>
+    public interface IRepositorioQuestao :IRepositorio<Questao>
     {
     }
 }
