@@ -23,6 +23,6 @@ namespace TesteDaMariana.WinAPP.Compartilhado
 
         public abstract UserControl ObtemListagem();
 
-        public abstract ConfiguracaoToolboxBase ObtemConfiguracaoToolbox();
+        public abstract ConfiguracaoToolBoxBase ObtemConfiguracaoToolbox();
     }
 }

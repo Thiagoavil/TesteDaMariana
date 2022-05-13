@@ -13,20 +13,19 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
     internal class ControladorDisciplina : ControladorBase
     {
         private readonly IRepositorioDisciplina repositorioDisciplina;
-        private readonly IRepositorioMateria repositorioMateria;
+        
 
-        private TabelaDisciplinaControl tabelaDisciplina;
-        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria)
+        private ListagemDisciplinaControl tabelaDisciplina;
+        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina)
         {
             this.repositorioDisciplina = repositorioDisciplina;
-            this.repositorioMateria = repositorioMateria;
+            
         }
 
         public override void Inserir()
         {
-            var contatos = repositorioDisciplina.SelecionarTodos();
 
-            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm(contatos);
+            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm();
             tela.Disciplina = new Disciplina();
 
             tela.GravarRegistro = repositorioDisciplina.Inserir;
@@ -35,7 +34,7 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
 
             if (resultado == DialogResult.OK)
             {
-                CarregarCompromissos();
+                CarregarDisciplinas();
             }
         }
 
@@ -50,9 +49,7 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
                 return;
             }
 
-            var disciplina = repositorioDisciplina.SelecionarTodos();
-
-            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm(contatos);
+            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm();
 
             tela.Disciplina = disciplinaSelecionada;
 
@@ -62,7 +59,7 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
 
             if (resultado == DialogResult.OK)
             {
-                CarregarCompromissos();
+                CarregarDisciplinas();
             }
         }
 
@@ -83,81 +80,42 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
             if (resultado == DialogResult.OK)
             {
                 repositorioDisciplina.Excluir(disciplinaSelecionada);
-                CarregarCompromissos();
+                CarregarDisciplinas();
             }
         }
 
-        public override void Filtrar()
-        {
-            TelaFiltroCompromissosForm telaFiltro = new TelaFiltroCompromissosForm();
-
-            if (telaFiltro.ShowDialog() == DialogResult.OK)
-            {
-                var statusSelecionado = telaFiltro.StatusSelecionado;
-                var dataInicial = telaFiltro.DataInicial.Date;
-                var dataFinal = telaFiltro.DataFinal.Date;
-
-                CarregarCompromissosComFiltro(statusSelecionado, dataInicial, dataFinal);
-            }
-        }
+        
 
         public override UserControl ObtemListagem()
         {
-            if (tabelaCompromissos == null)
-                tabelaCompromissos = new TabelaCompromissosControl();
+            if (tabelaDisciplina == null)
+                tabelaDisciplina = new ListagemDisciplinaControl();
 
-            CarregarCompromissos();
+            CarregarDisciplinas();
 
-            return tabelaCompromissos;
+            return tabelaDisciplina;
         }
 
-        public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
+        public override ConfiguracaoToolBoxBase ObtemConfiguracaoToolbox()
         {
-            return new ConfiguracaoToolboxCompromisso();
+            return new ConfiguracaoToolBoxDisciplina();
         }
 
 
-        private Compromisso ObtemDisciplinaSelecionada()
+        private Disciplina ObtemDisciplinaSelecionada()
         {
-            var numero = tabelaCompromissos.ObtemNumeroCompromissoSelecionado();
+            var numero = tabelaDisciplina.ObtemNumeroDisciplinaSelecionada();
 
-            return repositorioCompromisso.SelecionarPorNumero(numero);
+            return repositorioDisciplina.SelecionarPorNumero(numero);
         }
-
-        private void CarregarCompromissosComFiltro(StatusCompromissoEnum statusSelecionado, DateTime dataInicial, DateTime dataFinal)
+       
+        private void CarregarDisciplinas()
         {
-            string tipoCompromisso;
-            List<Compromisso> compromissos;
+            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
 
-            switch (statusSelecionado)
-            {
-                case StatusCompromissoEnum.Futuros:
-                    compromissos = repositorioCompromisso.SelecionarCompromissosFuturos(dataInicial, dataFinal);
-                    tipoCompromisso = "futuro(s)";
-                    break;
+            tabelaDisciplina.AtualizarRegistros(disciplinas);
 
-                case StatusCompromissoEnum.Passados:
-                    compromissos = repositorioCompromisso.SelecionarCompromissosPassados(DateTime.Now);
-                    tipoCompromisso = "passado(s)";
-                    break;
-
-                default:
-                    compromissos = repositorioCompromisso.SelecionarTodos();
-                    tipoCompromisso = ""; break;
-            }
-
-            tabelaCompromissos.AtualizarRegistros(compromissos);
-
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {compromissos.Count} compromisso(s) {tipoCompromisso}");
-        }
-
-        private void CarregarCompromissos()
-        {
-            List<Compromisso> compromissos = repositorioCompromisso.SelecionarTodos();
-
-            tabelaCompromissos.AtualizarRegistros(compromissos);
-
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {compromissos.Count} compromisso(s)");
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} Disciplina(s)");
         }
     }
 }

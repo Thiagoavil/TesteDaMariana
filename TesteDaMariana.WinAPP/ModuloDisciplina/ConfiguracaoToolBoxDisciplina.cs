@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TesteDaMariana.WinAPP.Compartilhado;
 
 namespace TesteDaMariana.WinAPP.ModuloDisciplina
 {
-    public class ConfiguracaoToolBoxDisciplina
+    public class ConfiguracaoToolBoxDisciplina : ConfiguracaoToolBoxBase
     {
         public override string TipoCadastro => "Controle de Compromissos";
 

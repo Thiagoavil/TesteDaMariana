@@ -33,8 +33,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.buttonAdicionar = new System.Windows.Forms.Button();
             this.textBoxRespostas = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,6 +42,7 @@
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.comboBoxMateria = new System.Windows.Forms.ComboBox();
             this.comboBoxDisciplina = new System.Windows.Forms.ComboBox();
+            this.checkBoxRespostaCerta = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,9 +78,9 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(-1, 85);
+            this.listBox1.Location = new System.Drawing.Point(-2, 136);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(349, 164);
+            this.listBox1.Size = new System.Drawing.Size(350, 164);
             this.listBox1.TabIndex = 3;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -89,8 +88,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.checkBoxRespostaCerta);
             this.panel1.Controls.Add(this.buttonAdicionar);
             this.panel1.Controls.Add(this.textBoxRespostas);
             this.panel1.Controls.Add(this.label4);
@@ -99,22 +97,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(445, 307);
             this.panel1.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(119, 266);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(224, 27);
-            this.textBox1.TabIndex = 8;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(-2, 269);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 20);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Resposta Certa :";
             // 
             // buttonAdicionar
             // 
@@ -198,6 +180,16 @@
             this.comboBoxDisciplina.Size = new System.Drawing.Size(259, 28);
             this.comboBoxDisciplina.TabIndex = 10;
             // 
+            // checkBoxRespostaCerta
+            // 
+            this.checkBoxRespostaCerta.AutoSize = true;
+            this.checkBoxRespostaCerta.Location = new System.Drawing.Point(87, 93);
+            this.checkBoxRespostaCerta.Name = "checkBoxRespostaCerta";
+            this.checkBoxRespostaCerta.Size = new System.Drawing.Size(128, 24);
+            this.checkBoxRespostaCerta.TabIndex = 8;
+            this.checkBoxRespostaCerta.Text = "Resposta certa";
+            this.checkBoxRespostaCerta.UseVisualStyleBackColor = true;
+            // 
             // TelaCadastroDeQuestaoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -234,12 +226,11 @@
         private System.Windows.Forms.TextBox textBoxRespostas;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxEnunciado;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonGravar;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.ComboBox comboBoxMateria;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxDisciplina;
+        private System.Windows.Forms.CheckBox checkBoxRespostaCerta;
     }
 }
