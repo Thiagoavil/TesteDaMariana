@@ -42,7 +42,6 @@
             this.label1.Size = new System.Drawing.Size(57, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nome :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBoxNome
             // 
@@ -50,19 +49,21 @@
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(199, 27);
             this.textBoxNome.TabIndex = 1;
-            this.textBoxNome.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // buttonGravar
             // 
+            this.buttonGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonGravar.Location = new System.Drawing.Point(190, 114);
             this.buttonGravar.Name = "buttonGravar";
             this.buttonGravar.Size = new System.Drawing.Size(94, 30);
             this.buttonGravar.TabIndex = 2;
             this.buttonGravar.Text = "Gravar";
             this.buttonGravar.UseVisualStyleBackColor = true;
+            this.buttonGravar.Click += new System.EventHandler(this.buttonGravar_Click);
             // 
             // buttonCancelar
             // 
+            this.buttonCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancelar.Location = new System.Drawing.Point(290, 114);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(94, 30);
@@ -70,7 +71,7 @@
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
             // 
-            // CadastroDeDisciplinascs
+            // TelaCadastroDeDisciplinaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +80,7 @@
             this.Controls.Add(this.buttonGravar);
             this.Controls.Add(this.textBoxNome);
             this.Controls.Add(this.label1);
-            this.Name = "CadastroDeDisciplinascs";
+            this.Name = "TelaCadastroDeDisciplinaForm";
             this.ShowIcon = false;
             this.Text = "Cadastro De Disciplina";
             this.ResumeLayout(false);

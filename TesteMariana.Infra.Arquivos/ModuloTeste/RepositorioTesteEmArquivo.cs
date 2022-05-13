@@ -14,7 +14,7 @@ namespace TesteMariana.Infra.Arquivos.ModuloTeste
         public RepositorioTesteEmArquivo(DataContext context) : base(context)
         {
             if (dataContext.Testes.Count > 0)
-                contador = dataContext.Testes.Max(x => x.id);
+                contador = dataContext.Testes.Max(x => x.Numero);
         }
 
         public override List<Teste> ObterRegistros()

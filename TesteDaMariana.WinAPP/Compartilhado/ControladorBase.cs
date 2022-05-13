@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TesteDaMariana.WinAPP.Compartilhado
 {
-    public class ControladorBase
+    public abstract class ControladorBase
     {
         public abstract void Inserir();
         public abstract void Editar();

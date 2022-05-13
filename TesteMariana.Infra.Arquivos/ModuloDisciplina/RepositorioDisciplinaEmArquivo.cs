@@ -16,7 +16,7 @@ namespace TesteMariana.Infra.Arquivos.ModuloDisciplina
         public RepositorioDisciplinaEmArquivo(DataContext dataContext) : base(dataContext)
         {
             if (dataContext.Disciplinas.Count > 0)
-                contador = dataContext.Disciplinas.Max(x => x.id);
+                contador = dataContext.Disciplinas.Max(x => x.Numero);
         }
 
         public override List<Disciplina> ObterRegistros()

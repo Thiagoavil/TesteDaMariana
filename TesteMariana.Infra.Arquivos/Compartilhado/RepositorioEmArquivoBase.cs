@@ -32,7 +32,7 @@ namespace TesteMariana.Infra.Arquivos.Compartilhado
 
             if (resultadoValidacao.IsValid)
             {
-                novoRegistro.id = ++contador;
+                novoRegistro.Numero = ++contador;
 
                 var registros = ObterRegistros();
 
@@ -54,7 +54,7 @@ namespace TesteMariana.Infra.Arquivos.Compartilhado
 
                 foreach (var item in registros)
                 {
-                    if (item.id == registro.id)
+                    if (item.Numero == registro.Numero)
                     {
                         item.Atualizar(registro);
                         break;
@@ -85,7 +85,7 @@ namespace TesteMariana.Infra.Arquivos.Compartilhado
         public virtual T SelecionarPorNumero(int numero)
         {
             return ObterRegistros()
-                .FirstOrDefault(x => x.id == numero);
+                .FirstOrDefault(x => x.Numero == numero);
         }
     }
 }

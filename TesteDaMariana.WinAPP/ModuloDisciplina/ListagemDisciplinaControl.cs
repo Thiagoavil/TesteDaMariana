@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TesteDaMariana.WinAPP.Compartilhado;
+using TesteMariana.Dominio.ModuloDisciplina;
 
 namespace TesteDaMariana.WinAPP.ModuloDisciplina
 {
@@ -16,22 +17,35 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
         public ListagemDisciplinaControl()
         {
             InitializeComponent();
+            grid.ConfigurarGridZebrado();
+            grid.ConfigurarGridSomenteLeitura();
+            grid.Columns.AddRange(ObterColunas());
+        }
+
+        public DataGridViewColumn[] ObterColunas()
+        {
+            var colunas = new DataGridViewColumn[]
+            {
+                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Numero"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Titulo", HeaderText = "Titulo"},
+            };
+
+            return colunas;
         }
 
         public int ObtemNumeroCompromissoSelecionado()
         {
-            return Grid.SelecionarNumero<int>();
+            return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarDisciplina(List<Compromisso> compromissos)
+        public void AtualizarDisciplina(List<Disciplina> disciplinas)
         {
             grid.Rows.Clear();
 
-            foreach (var compromisso in compromissos)
+            foreach (var disciplina in disciplinas)
             {
-                grid.Rows.Add(compromisso.Numero, compromisso.Assunto,
-                    compromisso.Data.ToShortDateString(), compromisso.HoraInicio,
-                    compromisso.Contato?.Nome);
+                grid.Rows.Add(disciplina.Numero,disciplina.Titulo);
             }
         }
 

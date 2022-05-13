@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TesteDaMariana.WinAPP.Compartilhado
 {
-    public class ConfiguracaoToolBoxBase
+    public abstract class ConfiguracaoToolBoxBase
     {
         public abstract string TipoCadastro { get; }
 

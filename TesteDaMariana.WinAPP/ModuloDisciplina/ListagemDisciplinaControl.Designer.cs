@@ -29,44 +29,44 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.Grid = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
+            this.grid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
-            // Grid
+            // grid
             // 
-            this.Grid.AllowUserToAddRows = false;
-            this.Grid.AllowUserToDeleteRows = false;
-            this.Grid.AllowUserToResizeRows = false;
+            this.grid.AllowUserToAddRows = false;
+            this.grid.AllowUserToDeleteRows = false;
+            this.grid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Blue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.Grid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.Grid.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Grid.Location = new System.Drawing.Point(0, 0);
-            this.Grid.Name = "Grid";
-            this.Grid.ReadOnly = true;
-            this.Grid.RowHeadersWidth = 51;
-            this.Grid.RowTemplate.Height = 29;
-            this.Grid.Size = new System.Drawing.Size(499, 396);
-            this.Grid.TabIndex = 0;
+            this.grid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grid.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grid.Location = new System.Drawing.Point(0, 0);
+            this.grid.Name = "grid";
+            this.grid.ReadOnly = true;
+            this.grid.RowHeadersWidth = 51;
+            this.grid.RowTemplate.Height = 29;
+            this.grid.Size = new System.Drawing.Size(499, 396);
+            this.grid.TabIndex = 0;
             // 
             // ListagemDisciplinaControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Grid);
+            this.Controls.Add(this.grid);
             this.Name = "ListagemDisciplinaControl";
             this.Size = new System.Drawing.Size(499, 396);
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView Grid;
+        private System.Windows.Forms.DataGridView grid;
     }
 }

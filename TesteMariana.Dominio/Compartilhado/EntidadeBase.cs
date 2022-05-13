@@ -8,8 +8,8 @@ namespace TesteMariana.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<T>
     {
-        public string titulo { get; set; }
-        public int id { get; set; }
+        public string Titulo { get; set; }
+        public int Numero { get; set; }
 
         public abstract void Atualizar(T registro);
     }

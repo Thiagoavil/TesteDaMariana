@@ -14,7 +14,7 @@ namespace TesteMariana.Infra.Arquivos.ModuloMateria
         public RepositorioMateriaEmArquivo(DataContext context) : base(context)
         {
             if (dataContext.Materias.Count > 0)
-                contador = dataContext.Materias.Max(x => x.id);
+                contador = dataContext.Materias.Max(x => x.Numero);
         }
 
         public override List<Materia> ObterRegistros()

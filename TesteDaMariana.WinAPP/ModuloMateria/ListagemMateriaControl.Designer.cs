@@ -52,7 +52,6 @@
             this.grid.RowTemplate.Height = 29;
             this.grid.Size = new System.Drawing.Size(723, 407);
             this.grid.TabIndex = 0;
-            this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
             // 
             // ListagemMateriaControl
             // 

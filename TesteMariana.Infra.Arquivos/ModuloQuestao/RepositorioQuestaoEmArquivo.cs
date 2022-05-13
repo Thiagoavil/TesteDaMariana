@@ -15,7 +15,7 @@ namespace TesteMariana.Infra.Arquivos.ModuloQuestao
         public RepositorioQuestaoEmArquivo(DataContext context) : base(context)
         {
             if (dataContext.Questoes.Count > 0)
-                contador = dataContext.Questoes.Max(x => x.id);
+                contador = dataContext.Questoes.Max(x => x.Numero);
         }
 
         public override List<Questao> ObterRegistros()
