@@ -88,6 +88,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.checkBoxRespostaCerta);
             this.panel1.Controls.Add(this.buttonAdicionar);
             this.panel1.Controls.Add(this.textBoxRespostas);
@@ -130,7 +131,7 @@
             this.label6.BackColor = System.Drawing.SystemColors.ControlDark;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(22, 195);
+            this.label6.Location = new System.Drawing.Point(-2, -2);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(127, 28);
             this.label6.TabIndex = 9;
@@ -195,7 +196,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(476, 566);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBoxDisciplina);
             this.Controls.Add(this.comboBoxMateria);
             this.Controls.Add(this.buttonCancelar);

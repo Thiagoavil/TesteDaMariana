@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TesteDaMariana.WinAPP.Compartilhado;
 
 namespace TesteDaMariana.WinAPP.ModuloDisciplina
 {
@@ -17,9 +18,22 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
             InitializeComponent();
         }
 
-        private void Grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public int ObtemNumeroCompromissoSelecionado()
         {
-
+            return Grid.SelecionarNumero<int>();
         }
+
+        public void AtualizarDisciplina(List<Compromisso> compromissos)
+        {
+            grid.Rows.Clear();
+
+            foreach (var compromisso in compromissos)
+            {
+                grid.Rows.Add(compromisso.Numero, compromisso.Assunto,
+                    compromisso.Data.ToShortDateString(), compromisso.HoraInicio,
+                    compromisso.Contato?.Nome);
+            }
+        }
+
     }
 }

@@ -30,8 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Grid = new System.Windows.Forms.DataGridView();
-            this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Disciplina = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +44,6 @@
             this.Grid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Grid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Numero,
-            this.Disciplina});
             this.Grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Grid.Location = new System.Drawing.Point(0, 0);
             this.Grid.Name = "Grid";
@@ -57,24 +52,6 @@
             this.Grid.RowTemplate.Height = 29;
             this.Grid.Size = new System.Drawing.Size(499, 396);
             this.Grid.TabIndex = 0;
-            this.Grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CellContentClick);
-            // 
-            // Numero
-            // 
-            this.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Numero.HeaderText = "Numero";
-            this.Numero.MinimumWidth = 6;
-            this.Numero.Name = "Numero";
-            this.Numero.ReadOnly = true;
-            this.Numero.Width = 92;
-            // 
-            // Disciplina
-            // 
-            this.Disciplina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Disciplina.HeaderText = "Disciplina";
-            this.Disciplina.MinimumWidth = 6;
-            this.Disciplina.Name = "Disciplina";
-            this.Disciplina.ReadOnly = true;
             // 
             // ListagemDisciplinaControl
             // 
@@ -91,7 +68,5 @@
         #endregion
 
         private System.Windows.Forms.DataGridView Grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Disciplina;
     }
 }

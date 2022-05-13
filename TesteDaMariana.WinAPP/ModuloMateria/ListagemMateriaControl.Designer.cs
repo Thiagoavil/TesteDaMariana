@@ -30,10 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
-            this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Disciplina = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Serie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,11 +44,6 @@
             this.grid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Numero,
-            this.Materia,
-            this.Disciplina,
-            this.Serie});
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(0, 0);
             this.grid.Name = "grid";
@@ -62,39 +53,6 @@
             this.grid.Size = new System.Drawing.Size(723, 407);
             this.grid.TabIndex = 0;
             this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
-            // 
-            // Numero
-            // 
-            this.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Numero.HeaderText = "Numero";
-            this.Numero.MinimumWidth = 6;
-            this.Numero.Name = "Numero";
-            this.Numero.ReadOnly = true;
-            this.Numero.Width = 92;
-            // 
-            // Materia
-            // 
-            this.Materia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Materia.HeaderText = "Materia";
-            this.Materia.MinimumWidth = 6;
-            this.Materia.Name = "Materia";
-            this.Materia.ReadOnly = true;
-            // 
-            // Disciplina
-            // 
-            this.Disciplina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Disciplina.HeaderText = "Disciplina";
-            this.Disciplina.MinimumWidth = 6;
-            this.Disciplina.Name = "Disciplina";
-            this.Disciplina.ReadOnly = true;
-            // 
-            // Serie
-            // 
-            this.Serie.HeaderText = "Série";
-            this.Serie.MinimumWidth = 6;
-            this.Serie.Name = "Serie";
-            this.Serie.ReadOnly = true;
-            this.Serie.Width = 125;
             // 
             // ListagemMateriaControl
             // 
@@ -111,9 +69,5 @@
         #endregion
 
         private System.Windows.Forms.DataGridView grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Materia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Disciplina;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Serie;
     }
 }

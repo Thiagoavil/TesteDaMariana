@@ -51,7 +51,7 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
                 return;
             }
 
-            var disciplina = repositorioMateria.SelecionarTodos();
+            var disciplina = repositorioDisciplina.SelecionarTodos();
 
             TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(disciplina);
 

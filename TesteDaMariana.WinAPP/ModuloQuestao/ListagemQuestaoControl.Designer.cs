@@ -30,10 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
-            this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pergunta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Disciplina = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,11 +44,6 @@
             this.grid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Numero,
-            this.Pergunta,
-            this.Materia,
-            this.Disciplina});
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(0, 0);
             this.grid.Name = "grid";
@@ -61,38 +52,6 @@
             this.grid.RowTemplate.Height = 29;
             this.grid.Size = new System.Drawing.Size(675, 446);
             this.grid.TabIndex = 1;
-            // 
-            // Numero
-            // 
-            this.Numero.HeaderText = "Numero";
-            this.Numero.MinimumWidth = 6;
-            this.Numero.Name = "Numero";
-            this.Numero.ReadOnly = true;
-            this.Numero.Width = 125;
-            // 
-            // Pergunta
-            // 
-            this.Pergunta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Pergunta.HeaderText = "Pergunta";
-            this.Pergunta.MinimumWidth = 6;
-            this.Pergunta.Name = "Pergunta";
-            this.Pergunta.ReadOnly = true;
-            // 
-            // Materia
-            // 
-            this.Materia.HeaderText = "Materia";
-            this.Materia.MinimumWidth = 6;
-            this.Materia.Name = "Materia";
-            this.Materia.ReadOnly = true;
-            this.Materia.Width = 125;
-            // 
-            // Disciplina
-            // 
-            this.Disciplina.HeaderText = "Disciplina";
-            this.Disciplina.MinimumWidth = 6;
-            this.Disciplina.Name = "Disciplina";
-            this.Disciplina.ReadOnly = true;
-            this.Disciplina.Width = 125;
             // 
             // ListagemQuestaoControl
             // 
@@ -109,9 +68,5 @@
         #endregion
 
         private System.Windows.Forms.DataGridView grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pergunta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Materia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Disciplina;
     }
 }
