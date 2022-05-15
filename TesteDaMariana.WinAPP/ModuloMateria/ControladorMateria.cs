@@ -120,6 +120,11 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {materias.Count} Materia(s)");
         }
+
+        public override void PDF()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

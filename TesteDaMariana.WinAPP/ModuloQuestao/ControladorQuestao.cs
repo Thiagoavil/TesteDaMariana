@@ -125,5 +125,9 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {questoes.Count} Questõe(s)");
         }
+        public override void PDF()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

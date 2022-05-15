@@ -9,7 +9,7 @@ using TesteMariana.Infra.Arquivos.Compartilhado;
 
 namespace TesteMariana.Infra.Arquivos.ModuloTeste
 {
-    internal class RepositorioTesteEmArquivo : RepositorioEmArquivoBase<Teste>, IRepositorioTeste
+    public class RepositorioTesteEmArquivo : RepositorioEmArquivoBase<Teste>, IRepositorioTeste
     {
         public RepositorioTesteEmArquivo(DataContext context) : base(context)
         {

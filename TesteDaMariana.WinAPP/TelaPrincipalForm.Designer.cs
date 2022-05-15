@@ -40,6 +40,7 @@
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.btnPDF = new System.Windows.Forms.ToolStripButton();
+            this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
@@ -76,7 +77,7 @@
             // 
             this.testeMenuItem.Name = "testeMenuItem";
             this.testeMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.testeMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.testeMenuItem.Size = new System.Drawing.Size(181, 26);
             this.testeMenuItem.Text = "Teste";
             this.testeMenuItem.Click += new System.EventHandler(this.testeMenuItem_Click);
             // 
@@ -84,7 +85,7 @@
             // 
             this.materiaMenuItem.Name = "materiaMenuItem";
             this.materiaMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.materiaMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.materiaMenuItem.Size = new System.Drawing.Size(181, 26);
             this.materiaMenuItem.Text = "Matéria";
             this.materiaMenuItem.Click += new System.EventHandler(this.materiaMenuItem_Click);
             // 
@@ -92,7 +93,7 @@
             // 
             this.questaoMenuItem.Name = "questaoMenuItem";
             this.questaoMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.questaoMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.questaoMenuItem.Size = new System.Drawing.Size(181, 26);
             this.questaoMenuItem.Text = "Questão";
             this.questaoMenuItem.Click += new System.EventHandler(this.questaoMenuItem_Click);
             // 
@@ -100,7 +101,7 @@
             // 
             this.disciplinasMenuItem.Name = "disciplinasMenuItem";
             this.disciplinasMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.disciplinasMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.disciplinasMenuItem.Size = new System.Drawing.Size(181, 26);
             this.disciplinasMenuItem.Text = "Disciplina";
             this.disciplinasMenuItem.Click += new System.EventHandler(this.disciplinasMenuItem_Click);
             // 
@@ -112,7 +113,8 @@
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
-            this.btnPDF});
+            this.btnPDF,
+            this.labelTipoCadastro});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
@@ -120,7 +122,6 @@
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnInserir
             // 
@@ -132,6 +133,7 @@
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(48, 44);
             this.btnInserir.Text = "Inserir";
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // btnEditar
             // 
@@ -155,6 +157,7 @@
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(48, 44);
             this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnPDF
             // 
@@ -166,6 +169,14 @@
             this.btnPDF.Name = "btnPDF";
             this.btnPDF.Size = new System.Drawing.Size(48, 44);
             this.btnPDF.Text = "PDF";
+            this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
+            // 
+            // labelTipoCadastro
+            // 
+            this.labelTipoCadastro.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.labelTipoCadastro.Name = "labelTipoCadastro";
+            this.labelTipoCadastro.Size = new System.Drawing.Size(121, 44);
+            this.labelTipoCadastro.Text = "[tipoCadastro]";
             // 
             // panelRegistros
             // 
@@ -195,7 +206,7 @@
             this.labelRodape.Size = new System.Drawing.Size(67, 20);
             this.labelRodape.Text = "[rodapé]";
             // 
-            // TelaPrincipal
+            // TelaPrincipalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,7 +215,7 @@
             this.Controls.Add(this.panelRegistros);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menu);
-            this.Name = "TelaPrincipal";
+            this.Name = "TelaPrincipalForm";
             this.ShowIcon = false;
             this.Text = "Tela Principal";
             this.menu.ResumeLayout(false);
@@ -236,5 +247,6 @@
         private System.Windows.Forms.Panel panelRegistros;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel labelRodape;
+        private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
     }
 }

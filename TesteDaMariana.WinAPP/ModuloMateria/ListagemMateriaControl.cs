@@ -42,7 +42,7 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
             return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarMateria(List<Materia> materias)
+        public void AtualizarRegistros(List<Materia> materias)
         {
             grid.Rows.Clear();
 

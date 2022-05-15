@@ -34,12 +34,12 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
             return colunas;
         }
 
-        public int ObtemNumeroCompromissoSelecionado()
+        public int ObtemNumeroDisciplinaSelecionada()
         {
             return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarDisciplina(List<Disciplina> disciplinas)
+        public void AtualizarResgistros(List<Disciplina> disciplinas)
         {
             grid.Rows.Clear();
 

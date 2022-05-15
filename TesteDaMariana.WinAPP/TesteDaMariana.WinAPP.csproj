@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TesteMariana.Dominio\TesteMariana.Dominio.csproj" />
+    <ProjectReference Include="..\TesteMariana.Infra.Arquivos\TesteMariana.Infra.Arquivos.csproj" />
   </ItemGroup>
 
 </Project>

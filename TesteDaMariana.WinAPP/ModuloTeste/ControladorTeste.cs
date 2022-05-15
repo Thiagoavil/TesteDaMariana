@@ -21,12 +21,12 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
 
 
         private ListagemTesteControl tabelaTeste;
-        public ControladorTeste(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina, IRepositorioQuestao repositorioQuestao, IRepositorioTeste repositorioTeste)
+        public ControladorTeste(IRepositorioTeste repositorioTeste,IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina, IRepositorioQuestao repositorioQuestao)
         {
+            this.repositorioTeste = repositorioTeste;
             this.repositorioMateria = repositorioMateria;
             this.repositorioDisciplina = repositorioDisciplina;
             this.repositorioQuestao = repositorioQuestao;
-            this.repositorioTeste = repositorioTeste;
         }
 
         public override void Inserir()
@@ -129,6 +129,11 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             tabelaTeste.AtualizarRegistros(testes);
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {testes.Count} Teste(s)");
+        }
+
+        public override void PDF()
+        {
+            throw new NotImplementedException();
         }
     }
 }

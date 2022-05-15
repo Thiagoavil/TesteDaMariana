@@ -10,7 +10,7 @@ using TesteMariana.Infra.Arquivos.Compartilhado;
 
 namespace TesteMariana.Infra.Arquivos.ModuloQuestao
 {
-    internal class RepositorioQuestaoEmArquivo : RepositorioEmArquivoBase<Questao>, IRepositorioQuestao
+    public class RepositorioQuestaoEmArquivo : RepositorioEmArquivoBase<Questao>, IRepositorioQuestao
     {
         public RepositorioQuestaoEmArquivo(DataContext context) : base(context)
         {

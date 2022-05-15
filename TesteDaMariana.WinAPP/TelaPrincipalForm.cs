@@ -7,57 +7,154 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TesteDaMariana.WinAPP.Compartilhado;
 using TesteDaMariana.WinAPP.ModuloDisciplina;
 using TesteDaMariana.WinAPP.ModuloMateria;
 using TesteDaMariana.WinAPP.ModuloQuestao;
 using TesteDaMariana.WinAPP.ModuloTeste;
+using TesteMariana.Infra.Arquivos.Compartilhado;
+using TesteMariana.Infra.Arquivos.ModuloDisciplina;
+using TesteMariana.Infra.Arquivos.ModuloMateria;
+using TesteMariana.Infra.Arquivos.ModuloQuestao;
+using TesteMariana.Infra.Arquivos.ModuloTeste;
+using TesteDaMariana.WinAPP.Compartilhado;
 
 namespace TesteDaMariana.WinAPP
 {
     public partial class TelaPrincipalForm : Form
     {
-        public TelaPrincipalForm()
+        private ControladorBase controlador;
+        private Dictionary<string, ControladorBase> controladores;
+        private DataContext contextoDados;
+        public TelaPrincipalForm(DataContext contextoDados)
         {
             InitializeComponent();
+            Instancia = this;
+
+            labelRodape.Text = string.Empty;
+            labelTipoCadastro.Text = string.Empty;
+
+            this.contextoDados = contextoDados;
+
+            InicializarControladores();
+        }
+        public static TelaPrincipalForm Instancia
+        {
+            get;
+            private set;
+        }
+        public void AtualizarRodape(string mensagem)
+        {
+            labelRodape.Text = mensagem;
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void btnInserir_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
+            controlador.Inserir();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-
+            controlador.Editar();
+        }
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            controlador.Excluir();
+        }
+        private void btnPDF_Click(object sender, EventArgs e)
+        {
+            controlador.PDF();
         }
 
         private void disciplinasMenuItem_Click(object sender, EventArgs e)
         {
-            ListagemDisciplinaControl listagemDisciplina = new();
-            panelRegistros.Controls.Add(listagemDisciplina);
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void materiaMenuItem_Click(object sender, EventArgs e)
         {
-            ListagemMateriaControl listagemMateria = new();
-            panelRegistros.Controls.Add(listagemMateria);
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void questaoMenuItem_Click(object sender, EventArgs e)
         {
-            ListagemQuestaoControl listagemQuestao = new();
-            panelRegistros.Controls.Add(listagemQuestao);
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void testeMenuItem_Click(object sender, EventArgs e)
         {
-            ListagemTesteControl listagemTeste = new();
-            panelRegistros.Controls.Add(listagemTeste);
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender); ;
         }
+        private void ConfigurarBotoes(ConfiguracaoToolBoxBase configuracao)
+        {
+            btnInserir.Enabled = configuracao.InserirHabilitado;
+            btnEditar.Enabled = configuracao.EditarHabilitado;
+            btnExcluir.Enabled = configuracao.ExcluirHabilitado;
+            btnPDF.Enabled = configuracao.TooltipGerarpdfHabilitado;
+        }
+
+        private void ConfigurarTooltips(ConfiguracaoToolBoxBase configuracao)
+        {
+            btnInserir.ToolTipText = configuracao.TooltipInserir;
+            btnEditar.ToolTipText = configuracao.TooltipEditar;
+            btnExcluir.ToolTipText = configuracao.TooltipExcluir;
+            btnPDF.ToolTipText = configuracao.TooltipGerarPdf;
+        }
+
+        private void ConfigurarTelaPrincipal(ToolStripMenuItem opcaoSelecionada)
+        {
+            var tipo = opcaoSelecionada.Text;
+
+            controlador = controladores[tipo];
+
+            ConfigurarToolbox();
+
+            ConfigurarListagem();
+        }
+
+        private void ConfigurarToolbox()
+        {
+            ConfiguracaoToolBoxBase configuracao = controlador.ObtemConfiguracaoToolbox();
+
+            if (configuracao != null)
+            {
+                toolStrip1.Enabled = true;
+
+                labelTipoCadastro.Text = configuracao.TipoCadastro;
+
+                ConfigurarTooltips(configuracao);
+
+                ConfigurarBotoes(configuracao);
+            }
+        }
+
+        private void ConfigurarListagem()
+        {
+            AtualizarRodape("");
+
+            var listagemControl = controlador.ObtemListagem();
+
+            panelRegistros.Controls.Clear();
+
+            listagemControl.Dock = DockStyle.Fill;
+
+            panelRegistros.Controls.Add(listagemControl);
+        }
+
+        private void InicializarControladores()
+        {
+            var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
+            var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
+            var repositorioQuestao = new RepositorioQuestaoEmArquivo(contextoDados);
+            var repositorioTeste = new RepositorioTesteEmArquivo(contextoDados);
+
+            controladores = new Dictionary<string, ControladorBase>();
+
+            controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
+            controladores.Add("Materias", new ControladorMateria(repositorioMateria,repositorioDisciplina));
+            controladores.Add("Questões", new ControladorQuestao(repositorioMateria, repositorioDisciplina,repositorioQuestao));
+            controladores.Add("Testes", new ControladorTeste (repositorioTeste,repositorioMateria, repositorioDisciplina,repositorioQuestao));
+        }
+
     }
 }

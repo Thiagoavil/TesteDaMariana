@@ -113,9 +113,14 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
         {
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
 
-            tabelaDisciplina.AtualizarRegistros(disciplinas);
+            tabelaDisciplina.AtualizarResgistros(disciplinas);
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} Disciplina(s)");
+        }
+
+        public override void PDF()
+        {
+            throw new NotImplementedException();
         }
     }
 }
