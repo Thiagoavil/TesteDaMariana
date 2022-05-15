@@ -40,7 +40,7 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
             return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarQuestao(List<Questao> questoes)
+        public void AtualizarRegistros(List<Questao> questoes)
         {
             grid.Rows.Clear();
 

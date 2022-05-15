@@ -19,9 +19,9 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
         public TelaCadastroMateriaForm(List<Disciplina> disciplinas)
         {
             InitializeComponent();
-            CarregarContatos(disciplinas);
+            CarregarDisciplinas(disciplinas);
         }
-        private void CarregarContatos(List<Disciplina> disciplinas)
+        private void CarregarDisciplinas(List<Disciplina> disciplinas)
         {
             comboBoxDisciplina.Items.Clear();
 

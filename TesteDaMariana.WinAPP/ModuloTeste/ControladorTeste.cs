@@ -35,7 +35,7 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             var disciplina = repositorioDisciplina.SelecionarTodos();
             var questao =repositorioQuestao.SelecionarTodos();
 
-            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm(materia, disciplina,questao);
+            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina);
             tela.Teste = new Teste();
 
             tela.GravarRegistro = repositorioTeste.Inserir;
@@ -63,11 +63,11 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             var disciplina = repositorioDisciplina.SelecionarTodos();
             var questão = repositorioQuestao.SelecionarTodos();
 
-            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm(materia, disciplina,questão);
+            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina);
 
             tela.Teste = TesteSelecionado;
 
-            tela.GravarRegistro = repositorioQuestao.Editar;
+            tela.GravarRegistro = repositorioTeste.Editar;
 
             DialogResult resultado = tela.ShowDialog();
 

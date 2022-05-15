@@ -9,16 +9,15 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
 {
     internal class ConfiguracaoToolBoxMateria : ConfiguracaoToolBoxBase
     {
-        public override string TipoCadastro => "Controle de Compromissos";
+        public override string TipoCadastro => "Controle de Materias";
 
-        public override string TooltipInserir => "Inserir um novo compromisso";
+        public override string TooltipInserir => "Inserir uma nova materia";
 
-        public override string TooltipEditar => "Editar um compromisso existente";
+        public override string TooltipEditar => "Editar uma materia existente";
 
-        public override string TooltipExcluir => "Excluir um compromisso existente";
+        public override string TooltipExcluir => "Excluir uma materia existente";
 
-        public override string TooltipFiltrar { get { return "Filtrar Compromisso por Status"; } }
+        public override string TooltipGerarPdf => "Gerar um PDF";
 
-        public override bool FiltrarHabilitado => true;
     }
 }

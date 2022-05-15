@@ -150,10 +150,10 @@ namespace TesteDaMariana.WinAPP
 
             controladores = new Dictionary<string, ControladorBase>();
 
-            controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
-            controladores.Add("Materias", new ControladorMateria(repositorioMateria,repositorioDisciplina));
-            controladores.Add("Questões", new ControladorQuestao(repositorioMateria, repositorioDisciplina,repositorioQuestao));
-            controladores.Add("Testes", new ControladorTeste (repositorioTeste,repositorioMateria, repositorioDisciplina,repositorioQuestao));
+            controladores.Add("Disciplina", new ControladorDisciplina(repositorioDisciplina));
+            controladores.Add("Matéria", new ControladorMateria(repositorioMateria,repositorioDisciplina));
+            controladores.Add("Questão", new ControladorQuestao( repositorioDisciplina,repositorioQuestao));
+            controladores.Add("Teste", new ControladorTeste (repositorioTeste,repositorioMateria, repositorioDisciplina,repositorioQuestao));
         }
 
     }

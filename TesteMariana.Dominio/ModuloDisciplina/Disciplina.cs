@@ -14,5 +14,9 @@ namespace TesteMariana.Dominio.ModuloDisciplina
         public override void Atualizar(Disciplina registro)
         {
         }
+        public override string ToString()
+        {
+            return Titulo;
+        }
     }
 }

@@ -9,16 +9,14 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
 {
     public class ConfiguracaoToolBoxDisciplina : ConfiguracaoToolBoxBase
     {
-        public override string TipoCadastro => "Controle de Compromissos";
+        public override string TipoCadastro => "Controle de Disciplinas";
 
-        public override string TooltipInserir => "Inserir um novo compromisso";
+        public override string TooltipInserir => "Inserir uma nova disciplina";
 
-        public override string TooltipEditar => "Editar um compromisso existente";
+        public override string TooltipEditar => "Editar uma disciplina existente";
 
-        public override string TooltipExcluir => "Excluir um compromisso existente";
+        public override string TooltipExcluir => "Excluir uma disciplina existente";
 
-        public override string TooltipFiltrar { get { return "Filtrar Compromisso por Status"; } }
-
-        public override bool FiltrarHabilitado => true;
+        public override string TooltipGerarPdf => "Gerar um PDF";
     }
 }

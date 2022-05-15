@@ -9,16 +9,14 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
 {
     internal class ConfiguracaoToolBoxTeste : ConfiguracaoToolBoxBase
     {
-        public override string TipoCadastro => "Controle de Compromissos";
+        public override string TipoCadastro => "Controle de Testes";
 
-        public override string TooltipInserir => "Inserir um novo compromisso";
+        public override string TooltipInserir => "Inserir um novo teste";
 
-        public override string TooltipEditar => "Editar um compromisso existente";
+        public override string TooltipEditar => "Editar um teste existente";
 
-        public override string TooltipExcluir => "Excluir um compromisso existente";
+        public override string TooltipExcluir => "Excluir um teste existente";
 
-        public override string TooltipFiltrar { get { return "Filtrar Compromisso por Status"; } }
-
-        public override bool FiltrarHabilitado => true;
+        public override string TooltipGerarPdf => "Gerar um PDF";
     }
 }

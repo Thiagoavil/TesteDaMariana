@@ -13,28 +13,25 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
 {
     internal class ControladorQuestao : ControladorBase
     {
-        private readonly IRepositorioMateria repositorioMateria;
         private readonly IRepositorioDisciplina repositorioDisciplina;
         private readonly IRepositorioQuestao repositorioQuestao;
 
 
         private ListagemQuestaoControl tabelaQuestao;
-        public ControladorQuestao(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina, IRepositorioQuestao repositorioQuestao)
-        {
-            this.repositorioMateria = repositorioMateria;
+        public ControladorQuestao( IRepositorioDisciplina repositorioDisciplina, IRepositorioQuestao repositorioQuestao)
+        {    
             this.repositorioDisciplina = repositorioDisciplina;
             this.repositorioQuestao = repositorioQuestao;
         }
 
         public override void Inserir()
-        {
-            var materia = repositorioMateria.SelecionarTodos();
-            var disciplina = repositorioDisciplina.SelecionarTodos();
+        { 
+            var disciplinas = repositorioDisciplina.SelecionarTodos();
 
-            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(materia,disciplina);
+            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplinas);
             tela.Questao = new Questao();
 
-            tela.GravarRegistro = repositorioMateria.Inserir;
+            tela.GravarRegistro = repositorioQuestao.Inserir;
 
             DialogResult resultado = tela.ShowDialog();
 
@@ -55,10 +52,9 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
                 return;
             }
 
-            var materia = repositorioMateria.SelecionarTodos();
             var disciplina = repositorioDisciplina.SelecionarTodos();
 
-            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(materia,disciplina);
+            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplina);
 
             tela.Questao = QuestaoSelecionada;
 

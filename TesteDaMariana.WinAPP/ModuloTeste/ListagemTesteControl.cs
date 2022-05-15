@@ -43,12 +43,12 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             return colunas;
         }
 
-        public int ObtemNumeroTesteSelecionada()
+        public int ObtemNumeroTesteSelecionado()
         {
             return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarTeste(List<Teste> testes)
+        public void AtualizarRegistros(List<Teste> testes)
         {
             grid.Rows.Clear();
 
