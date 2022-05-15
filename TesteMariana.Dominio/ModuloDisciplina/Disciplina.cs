@@ -10,13 +10,19 @@ namespace TesteMariana.Dominio.ModuloDisciplina
 {
     public class Disciplina : EntidadeBase<Disciplina>
     {
-        public List<Materia> materias { get; set; }
+        
         public override void Atualizar(Disciplina registro)
         {
         }
+
         public override string ToString()
         {
             return Titulo;
+        }
+
+        public Disciplina Clone()
+        {
+            return (Disciplina)this.MemberwiseClone();
         }
     }
 }

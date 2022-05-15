@@ -17,13 +17,15 @@ namespace TesteDaMariana.WinAPP.Compartilhado
         public abstract string TooltipExcluir { get; }
 
         public abstract string TooltipGerarPdf { get; }
+        public abstract string TooltipDuplicar { get; }
 
         public virtual bool InserirHabilitado { get { return true; } }
 
         public virtual bool EditarHabilitado { get { return true; } }
 
         public virtual bool ExcluirHabilitado { get { return true; } }
-        public virtual bool TooltipGerarpdfHabilitado { get { return true; } }
+        public virtual bool GerarpdfHabilitado { get { return false; } }
+        public virtual bool duplicarHabilitado { get { return false; } }
 
     }
 }

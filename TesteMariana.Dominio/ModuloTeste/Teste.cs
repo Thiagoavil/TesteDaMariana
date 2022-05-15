@@ -21,5 +21,9 @@ namespace TesteMariana.Dominio.ModuloTeste
         public override void Atualizar(Teste registro)
         {
         }
+        public Teste Clone()
+        {
+            return (Teste)this.MemberwiseClone();
+        }
     }
 }

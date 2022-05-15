@@ -18,5 +18,10 @@ namespace TesteMariana.Dominio.ModuloQuestao
         public override void Atualizar(Questao registro)
         {
         }
+
+        public Questao Clone()
+        {
+            return (Questao)this.MemberwiseClone();
+        }
     }
 }

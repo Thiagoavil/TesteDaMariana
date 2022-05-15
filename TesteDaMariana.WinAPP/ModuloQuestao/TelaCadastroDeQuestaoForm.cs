@@ -16,12 +16,17 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
 {
     public partial class TelaCadastroDeQuestaoForm : Form
     {
-        public TelaCadastroDeQuestaoForm(List<Disciplina> disciplinas)
+        private List<Materia> materias;
+        private List<Alternativas> alternativas;
+        private IRepositorioQuestao repositorioQuestao;
+        public TelaCadastroDeQuestaoForm(List<Disciplina> disciplinas,List<Materia> materias,IRepositorioQuestao repositorioQuestao)
         {
             InitializeComponent();
+            this.repositorioQuestao=repositorioQuestao;
             CarregarDisciplinas(disciplinas);
-            var disciplinaselecionada = (Disciplina)comboBoxDisciplina.SelectedItem;
-            CarregarMaterias(disciplinaselecionada);
+            comboBoxDisciplina.SelectedIndex = 0;
+            this.materias = materias;
+            CarregarMaterias(materias);
             
         }
         private Questao questao;
@@ -37,14 +42,18 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
                 comboBoxDisciplina.Items.Add(item);
             }
         }
-        private void CarregarMaterias(Disciplina disciplinaselecionada)
+        private void CarregarMaterias(List<Materia> materias)
         {
             
             comboBoxMateria.Items.Clear();
 
-            foreach (var item in disciplinaselecionada.materias)
+            foreach (var item in materias)
             {
-                comboBoxMateria.Items.Add(item);
+                if(item.disciplina==(Disciplina)comboBoxDisciplina.SelectedItem)
+                {
+                    comboBoxMateria.Items.Add(item);
+                }
+               
             }
         }
 
@@ -78,14 +87,15 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
             List<string> titulos = AlternativasAdicionadas.Select(x => x.Resposta).ToList();
+            
 
             if (titulos.Count == 0 || titulos.Contains(textBoxRespostas.Text) == false)
             {
-                Alternativas alternativas = new ();
+                Alternativas alternativa = new ();
 
-                alternativas.Resposta = textBoxRespostas.Text;
-
-                listBox1.Items.Add(alternativas);
+                alternativa.Resposta = textBoxRespostas.Text;
+                alternativas.Add (alternativa);
+                listBox1.Items.Add(alternativa);
             }
         }
         
@@ -100,9 +110,29 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
             questao.Titulo = textBoxEnunciado.Text;
             questao.disciplina = (Disciplina)comboBoxDisciplina.SelectedItem;
             questao.materia=(Materia)comboBoxMateria.SelectedItem;
+            
+            foreach(Alternativas item in alternativas  )
+            {
+                questao.alternativas.Add(item);
+            }
 
+            var resultadoValidacao = GravarRegistro(Questao);
+
+            if(resultadoValidacao.IsValid==false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
             
         }
 
+        private void comboBoxDisciplina_SelectedValueChanged(object sender, EventArgs e)
+        {
+            comboBoxMateria.Enabled = true;
+            CarregarMaterias(materias);
+        }
     }
 }

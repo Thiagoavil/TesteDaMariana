@@ -18,5 +18,8 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
         public override string TooltipExcluir => "Excluir um teste existente";
 
         public override string TooltipGerarPdf => "Gerar um PDF";
+        public override string TooltipDuplicar => "Duplicar Teste";
+        public override bool GerarpdfHabilitado { get { return true; } }
+        public override bool duplicarHabilitado { get { return true; } }
     }
 }

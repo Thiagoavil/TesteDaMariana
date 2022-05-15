@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,9 +32,8 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
 
         public override void Inserir()
         {
-            var materia = repositorioMateria.SelecionarTodos();
+            
             var disciplina = repositorioDisciplina.SelecionarTodos();
-            var questao =repositorioQuestao.SelecionarTodos();
 
             TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina);
             tela.Teste = new Teste();
@@ -129,6 +129,21 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             tabelaTeste.AtualizarRegistros(testes);
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {testes.Count} Teste(s)");
+        }
+
+        public Func<Teste, ValidationResult> GravarRegistro { get; set; }
+
+        public override void Duplicar()
+        {
+            Teste TesteSelecionado = ObtemTesteSelecionado();
+
+            Teste teste = (Teste)TesteSelecionado.Clone();
+
+            GravarRegistro = repositorioTeste.Inserir;
+
+            GravarRegistro(teste);
+
+            CarregarTestes();
         }
 
         public override void PDF()

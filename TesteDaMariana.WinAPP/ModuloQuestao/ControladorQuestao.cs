@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +15,22 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
     internal class ControladorQuestao : ControladorBase
     {
         private readonly IRepositorioDisciplina repositorioDisciplina;
-        private readonly IRepositorioQuestao repositorioQuestao;
+        private readonly IRepositorioMateria repositorioMateria;
 
 
         private ListagemQuestaoControl tabelaQuestao;
-        public ControladorQuestao( IRepositorioDisciplina repositorioDisciplina, IRepositorioQuestao repositorioQuestao)
+        public ControladorQuestao( IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria)
         {    
             this.repositorioDisciplina = repositorioDisciplina;
-            this.repositorioQuestao = repositorioQuestao;
+            this.repositorioMateria = repositorioMateria;
         }
 
         public override void Inserir()
         { 
             var disciplinas = repositorioDisciplina.SelecionarTodos();
+            var materias = repositorioMateria.SelecionarTodos();
 
-            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplinas);
+            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplinas,materias);
             tela.Questao = new Questao();
 
             tela.GravarRegistro = repositorioQuestao.Inserir;
@@ -88,7 +90,6 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
                 CarregarQuestoes();
             }
         }
-
 
 
         public override UserControl ObtemListagem()

@@ -12,7 +12,14 @@ namespace TesteDaMariana.WinAPP.Compartilhado
         public abstract void Inserir();
         public abstract void Editar();
         public abstract void Excluir();
-        public abstract void PDF();
+        public virtual void Duplicar()
+        {
+
+        }
+        public virtual void PDF()
+        {
+
+        }
 
         public abstract UserControl ObtemListagem();
 

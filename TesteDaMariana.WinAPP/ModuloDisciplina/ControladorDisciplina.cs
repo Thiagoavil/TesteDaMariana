@@ -13,13 +13,14 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
     internal class ControladorDisciplina : ControladorBase
     {
         private readonly IRepositorioDisciplina repositorioDisciplina;
-        
+        private readonly IRepositorioMateria repositorioMateria;
+
 
         private ListagemDisciplinaControl tabelaDisciplina;
-        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina)
+        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina,IRepositorioMateria repositorioMateria)
         {
             this.repositorioDisciplina = repositorioDisciplina;
-            
+            this.repositorioMateria = repositorioMateria;
         }
 
         public override void Inserir()
@@ -73,6 +74,16 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
                 "Exclusão de disciplina", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            List<Materia> materias = repositorioMateria.SelecionarTodos();
+            foreach (Materia materia in materias)
+            {
+                if(materia.disciplina==disciplinaSelecionada)
+                {
+                    MessageBox.Show("Disciplina Com matérias",
+                "Exclusão de disciplina", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             DialogResult resultado = MessageBox.Show("Deseja realmente excluir a disciplina?",
                 "Exclusão de disciplina", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -84,7 +95,11 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
             }
         }
 
-        
+        public override void Duplicar()
+        {
+            
+        }
+
 
         public override UserControl ObtemListagem()
         {

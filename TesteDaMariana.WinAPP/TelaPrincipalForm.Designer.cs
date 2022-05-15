@@ -40,6 +40,7 @@
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.btnPDF = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDuplicar = new System.Windows.Forms.ToolStripButton();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -108,12 +109,14 @@
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.Enabled = false;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(50, 50);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
             this.btnPDF,
+            this.toolStripButtonDuplicar,
             this.labelTipoCadastro});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 30);
@@ -168,8 +171,17 @@
             this.btnPDF.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.btnPDF.Name = "btnPDF";
             this.btnPDF.Size = new System.Drawing.Size(48, 44);
-            this.btnPDF.Text = "PDF";
             this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
+            // 
+            // toolStripButtonDuplicar
+            // 
+            this.toolStripButtonDuplicar.AutoSize = false;
+            this.toolStripButtonDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDuplicar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDuplicar.Image")));
+            this.toolStripButtonDuplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDuplicar.Name = "toolStripButtonDuplicar";
+            this.toolStripButtonDuplicar.Size = new System.Drawing.Size(48, 44);
+            this.toolStripButtonDuplicar.Click += new System.EventHandler(this.toolStripButtonDuplicar_Click);
             // 
             // labelTipoCadastro
             // 
@@ -248,5 +260,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel labelRodape;
         private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDuplicar;
     }
 }

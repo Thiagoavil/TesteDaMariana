@@ -17,6 +17,8 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
 
         public override string TooltipExcluir => "Excluir uma disciplina existente";
 
-        public override string TooltipGerarPdf => "Gerar um PDF";
+        public override string TooltipGerarPdf { get { return ""; } }
+        public override string TooltipDuplicar { get { return ""; } }
+
     }
 }

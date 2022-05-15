@@ -176,6 +176,7 @@
             // 
             // comboBoxMateria
             // 
+            this.comboBoxMateria.Enabled = false;
             this.comboBoxMateria.FormattingEnabled = true;
             this.comboBoxMateria.Location = new System.Drawing.Point(113, 76);
             this.comboBoxMateria.Name = "comboBoxMateria";
@@ -189,6 +190,7 @@
             this.comboBoxDisciplina.Name = "comboBoxDisciplina";
             this.comboBoxDisciplina.Size = new System.Drawing.Size(259, 28);
             this.comboBoxDisciplina.TabIndex = 10;
+            this.comboBoxDisciplina.SelectedValueChanged += new System.EventHandler(this.comboBoxDisciplina_SelectedValueChanged);
             // 
             // TelaCadastroDeQuestaoForm
             // 

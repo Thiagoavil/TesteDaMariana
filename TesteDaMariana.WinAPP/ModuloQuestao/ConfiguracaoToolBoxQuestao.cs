@@ -17,6 +17,7 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
 
         public override string TooltipExcluir => "Excluir uma questão existente";
 
-        public override string TooltipGerarPdf => "Gerar um PDF";
+        public override string TooltipGerarPdf { get { return string.Empty; } }
+        public override string TooltipDuplicar { get { return string.Empty; } }
     }
 }

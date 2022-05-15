@@ -61,6 +61,10 @@ namespace TesteDaMariana.WinAPP
         {
             controlador.Excluir();
         }
+        private void toolStripButtonDuplicar_Click(object sender, EventArgs e)
+        {
+            controlador.Duplicar();
+        }
         private void btnPDF_Click(object sender, EventArgs e)
         {
             controlador.PDF();
@@ -90,7 +94,8 @@ namespace TesteDaMariana.WinAPP
             btnInserir.Enabled = configuracao.InserirHabilitado;
             btnEditar.Enabled = configuracao.EditarHabilitado;
             btnExcluir.Enabled = configuracao.ExcluirHabilitado;
-            btnPDF.Enabled = configuracao.TooltipGerarpdfHabilitado;
+            btnPDF.Enabled = configuracao.GerarpdfHabilitado;
+            toolStripButtonDuplicar.Enabled = configuracao.duplicarHabilitado;
         }
 
         private void ConfigurarTooltips(ConfiguracaoToolBoxBase configuracao)
@@ -99,6 +104,7 @@ namespace TesteDaMariana.WinAPP
             btnEditar.ToolTipText = configuracao.TooltipEditar;
             btnExcluir.ToolTipText = configuracao.TooltipExcluir;
             btnPDF.ToolTipText = configuracao.TooltipGerarPdf;
+            toolStripButtonDuplicar.ToolTipText= configuracao.TooltipDuplicar;
         }
 
         private void ConfigurarTelaPrincipal(ToolStripMenuItem opcaoSelecionada)
@@ -150,7 +156,7 @@ namespace TesteDaMariana.WinAPP
 
             controladores = new Dictionary<string, ControladorBase>();
 
-            controladores.Add("Disciplina", new ControladorDisciplina(repositorioDisciplina));
+            controladores.Add("Disciplina", new ControladorDisciplina(repositorioDisciplina,repositorioMateria));
             controladores.Add("Matéria", new ControladorMateria(repositorioMateria,repositorioDisciplina));
             controladores.Add("Questão", new ControladorQuestao( repositorioDisciplina,repositorioQuestao));
             controladores.Add("Teste", new ControladorTeste (repositorioTeste,repositorioMateria, repositorioDisciplina,repositorioQuestao));
