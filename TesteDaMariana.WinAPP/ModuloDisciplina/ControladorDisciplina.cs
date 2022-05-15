@@ -26,7 +26,7 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
         public override void Inserir()
         {
 
-            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm();
+            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm(repositorioDisciplina);
             tela.Disciplina = new Disciplina();
 
             tela.GravarRegistro = repositorioDisciplina.Inserir;
@@ -50,7 +50,7 @@ namespace TesteDaMariana.WinAPP.ModuloDisciplina
                 return;
             }
 
-            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm();
+            TelaCadastroDeDisciplinaForm tela = new TelaCadastroDeDisciplinaForm(repositorioDisciplina);
 
             tela.Disciplina = disciplinaSelecionada;
 

@@ -12,5 +12,9 @@ namespace TesteMariana.Dominio.ModuloQuestao
         public bool Correta { get; set; }
         public string Resposta { get; set; }
 
+        public override string ToString()
+        {
+            return Resposta;
+        }
     }
 }

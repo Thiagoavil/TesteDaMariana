@@ -16,9 +16,11 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
     public partial class TelaCadastroMateriaForm : Form
     {
         private Materia materia;
-        public TelaCadastroMateriaForm(List<Disciplina> disciplinas)
+        private IRepositorioMateria repositorioMateria;
+        public TelaCadastroMateriaForm(List<Disciplina> disciplinas,IRepositorioMateria repositorioMateria)
         {
             InitializeComponent();
+            this.repositorioMateria = repositorioMateria;
             CarregarDisciplinas(disciplinas);
         }
         private void CarregarDisciplinas(List<Disciplina> disciplinas)
@@ -80,6 +82,18 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
             }
 
             var resultadoValidacao = GravarRegistro(materia);
+
+            List<Materia> materias = repositorioMateria.SelecionarTodos();
+
+            foreach (var item in materias)
+            {
+                if (materia.Titulo == item.Titulo && materia.Numero != item.Numero)
+                {
+                    MessageBox.Show("Nome já existe",
+                    "Materias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             if (resultadoValidacao.IsValid == false)
             {

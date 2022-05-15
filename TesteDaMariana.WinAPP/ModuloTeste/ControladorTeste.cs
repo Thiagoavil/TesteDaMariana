@@ -32,10 +32,31 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
 
         public override void Inserir()
         {
-            
-            var disciplina = repositorioDisciplina.SelecionarTodos();
 
-            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina);
+            var disciplina = repositorioDisciplina.SelecionarTodos();
+            var materias =repositorioMateria.SelecionarTodos();
+            var questoes = repositorioQuestao.SelecionarTodos();
+
+            if(disciplina.Count==0)
+            {
+                MessageBox.Show("Crie uma disciplina primeiro",
+               "Criação de Teste", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if(materias.Count == 0 )
+            {
+                MessageBox.Show("Crie uma materia primeiro",
+               "Criação de Teste", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if(questoes.Count == 0)
+            {
+                MessageBox.Show("Crie uma questão primeiro",
+               "Criação de Teste", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina,materias,questoes);
             tela.Teste = new Teste();
 
             tela.GravarRegistro = repositorioTeste.Inserir;
@@ -63,7 +84,7 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             var disciplina = repositorioDisciplina.SelecionarTodos();
             var questão = repositorioQuestao.SelecionarTodos();
 
-            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina);
+            TelaCriacaoTesteForm tela = new TelaCriacaoTesteForm( disciplina,materia,questão);
 
             tela.Teste = TesteSelecionado;
 

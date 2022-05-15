@@ -15,10 +15,11 @@ namespace TesteDaMariana.WinAPP
     public partial class TelaCadastroDeDisciplinaForm : Form
     {
         private Disciplina disciplina;
-        public TelaCadastroDeDisciplinaForm()
+        private IRepositorioDisciplina repositorioDisciplinas;
+        public TelaCadastroDeDisciplinaForm(IRepositorioDisciplina repositorioDisciplinas)
         {
             InitializeComponent();
-            
+            this.repositorioDisciplinas=repositorioDisciplinas;
         }
 
 
@@ -51,6 +52,17 @@ namespace TesteDaMariana.WinAPP
             disciplina.Titulo = textBoxNome.Text;
 
             var resultadoValidacao = GravarRegistro(disciplina);
+            List<Disciplina> disciplinas = repositorioDisciplinas.SelecionarTodos();
+            
+            foreach(var item in disciplinas )
+            {
+                if (disciplina.Titulo==item.Titulo && disciplina.Numero!=item.Numero)
+                {
+                    MessageBox.Show("Nome já existe",
+                    "Disciplina", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             if (resultadoValidacao.IsValid == false)
             {

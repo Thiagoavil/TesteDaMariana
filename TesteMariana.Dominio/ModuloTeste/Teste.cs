@@ -21,6 +21,12 @@ namespace TesteMariana.Dominio.ModuloTeste
         public override void Atualizar(Teste registro)
         {
         }
+        public Teste()
+        {
+            DataDeCriacao = DateTime.Now;
+            questoes=new List<Questao>();
+        }
+
         public Teste Clone()
         {
             return (Teste)this.MemberwiseClone();

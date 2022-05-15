@@ -24,9 +24,8 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
             InitializeComponent();
             this.repositorioQuestao=repositorioQuestao;
             CarregarDisciplinas(disciplinas);
-            comboBoxDisciplina.SelectedIndex = 0;
             this.materias = materias;
-            CarregarMaterias(materias);
+            alternativas = new();
             
         }
         private Questao questao;

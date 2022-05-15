@@ -9,5 +9,15 @@ namespace TesteMariana.Dominio.ModuloMateria
 {
     public class ValidadorMateria : AbstractValidator<Materia>
     {
+        public ValidadorMateria()
+        {
+            RuleFor(x => x.Titulo)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(x => x.disciplina)
+                .NotNull()
+                .NotEmpty();
+        }
     }
 }

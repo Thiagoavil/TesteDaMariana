@@ -9,5 +9,12 @@ namespace TesteMariana.Dominio.ModuloDisciplina
 {
     public class ValidadorDisciplina : AbstractValidator<Disciplina>
     {
+        public ValidadorDisciplina()
+        {
+            RuleFor(x => x.Titulo)
+               .NotEmpty()
+               .NotNull();
+
+        }
     }
 }

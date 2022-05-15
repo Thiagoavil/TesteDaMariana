@@ -16,21 +16,35 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
     {
         private readonly IRepositorioDisciplina repositorioDisciplina;
         private readonly IRepositorioMateria repositorioMateria;
-
+        private readonly IRepositorioQuestao repositorioQuestao;
 
         private ListagemQuestaoControl tabelaQuestao;
-        public ControladorQuestao( IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria)
+        public ControladorQuestao( IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria,IRepositorioQuestao repositorioQuestao)
         {    
             this.repositorioDisciplina = repositorioDisciplina;
             this.repositorioMateria = repositorioMateria;
+            this.repositorioQuestao=repositorioQuestao;
         }
 
         public override void Inserir()
         { 
             var disciplinas = repositorioDisciplina.SelecionarTodos();
             var materias = repositorioMateria.SelecionarTodos();
+           
+            if(disciplinas.Count==0)
+            {
+                MessageBox.Show("Crie uma disciplina primeiro",
+                   "Criação de Questão", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (materias.Count == 0)
+            {
+                MessageBox.Show("Crie uma materia primeiro",
+               "Criação de Questão", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
-            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplinas,materias);
+            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplinas,materias,repositorioQuestao);
             tela.Questao = new Questao();
 
             tela.GravarRegistro = repositorioQuestao.Inserir;
@@ -55,8 +69,9 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
             }
 
             var disciplina = repositorioDisciplina.SelecionarTodos();
+            var materias = repositorioMateria.SelecionarTodos();
 
-            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplina);
+            TelaCadastroDeQuestaoForm tela = new TelaCadastroDeQuestaoForm(disciplina,materias,repositorioQuestao);
 
             tela.Questao = QuestaoSelecionada;
 

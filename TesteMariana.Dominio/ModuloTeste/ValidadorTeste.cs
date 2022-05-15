@@ -9,5 +9,24 @@ namespace TesteMariana.Dominio.ModuloTeste
 {
     public class ValidadorTeste : AbstractValidator<Teste>
     {
+        public ValidadorTeste()
+        {
+            RuleFor(x => x.Titulo)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(x => x.Materia)
+               .NotEmpty()
+               .NotNull();
+
+            RuleFor(x => x.Disciplina)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.DataDeCriacao)
+                .NotNull()
+                .NotEmpty()
+                .GreaterThanOrEqualTo(DateTime.Now);
+        }
     }
 }

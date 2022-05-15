@@ -158,7 +158,7 @@ namespace TesteDaMariana.WinAPP
 
             controladores.Add("Disciplina", new ControladorDisciplina(repositorioDisciplina,repositorioMateria));
             controladores.Add("Matéria", new ControladorMateria(repositorioMateria,repositorioDisciplina));
-            controladores.Add("Questão", new ControladorQuestao( repositorioDisciplina,repositorioQuestao));
+            controladores.Add("Questão", new ControladorQuestao( repositorioDisciplina,repositorioMateria,repositorioQuestao));
             controladores.Add("Teste", new ControladorTeste (repositorioTeste,repositorioMateria, repositorioDisciplina,repositorioQuestao));
         }
 

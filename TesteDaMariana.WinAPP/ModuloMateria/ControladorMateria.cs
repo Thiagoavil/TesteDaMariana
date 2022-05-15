@@ -25,13 +25,20 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
 
         public override void Inserir()
         {
-            var disciplina = repositorioDisciplina.SelecionarTodos();
+            var disciplinas = repositorioDisciplina.SelecionarTodos();
 
-            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(disciplina);
+            if (disciplinas.Count == 0)
+            {
+                MessageBox.Show("Crie uma disciplina primeiro",
+                   "Criação de Materia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(disciplinas,repositorioMateria);
             tela.Materia = new Materia();
 
             tela.GravarRegistro = repositorioMateria.Inserir;
-
+            
             DialogResult resultado = tela.ShowDialog();
 
             if (resultado == DialogResult.OK)
@@ -53,7 +60,7 @@ namespace TesteDaMariana.WinAPP.ModuloMateria
 
             var disciplina = repositorioDisciplina.SelecionarTodos();
 
-            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(disciplina);
+            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(disciplina,repositorioMateria);
 
             tela.Materia = materiaSelecionada;
 

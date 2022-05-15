@@ -19,10 +19,8 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             InitializeComponent();
             this.materias = materias;
             this.questoes = questoes;
-            foreach (Questao item in teste.questoes)
-            {
-                listBoxQuestoes.Items.Add(item);
-            }
+
+
             CarregarDisciplinas(disciplinas);
 
             CarregarMaterias(materias);
@@ -42,7 +40,6 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
                 {
                     comboBoxMateria.Items.Add(item);
                 }
-
             }
         }
 
@@ -70,6 +67,14 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
                 comboBoxMateria.SelectedItem = teste.Materia;
                 txtData.Text = teste.DataDeCriacao.ToShortDateString();
                 maskedTextBoxQuestoes.Text = teste.QuantidadeDeQuestoes.ToString();
+
+
+                foreach (Questao item in teste.questoes)
+                {
+                    listBoxQuestoes.Items.Add(item);
+                }
+
+
 
                 if (teste.Provao == true)
                     checkBoxProvão.Checked = true;

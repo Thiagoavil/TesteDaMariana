@@ -9,5 +9,19 @@ namespace TesteMariana.Dominio.ModuloQuestao
 {
     public class ValidadorQuestao : AbstractValidator<Questao>
     {
+        public ValidadorQuestao()
+        {
+            RuleFor(x => x.Titulo)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(x => x.materia)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.disciplina)
+                .NotEmpty()
+                .NotNull();
+        }
     }
 }

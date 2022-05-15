@@ -15,6 +15,11 @@ namespace TesteMariana.Dominio.ModuloQuestao
         public Disciplina disciplina { get; set; }
         public Materia materia { get; set; }
 
+        public Questao()
+        {
+            alternativas = new List<Alternativas>();
+        }
+
         public override void Atualizar(Questao registro)
         {
         }
