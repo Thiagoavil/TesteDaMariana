@@ -8,6 +8,7 @@ namespace TesteMariana.Dominio.ModuloQuestao
 {
     public class Alternativas
     {
+        public int Numero { get; set; }
         public string letra { get; set; }
         public bool Correta { get; set; }
         public string Resposta { get; set; }

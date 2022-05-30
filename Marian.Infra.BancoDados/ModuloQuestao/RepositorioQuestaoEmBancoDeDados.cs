@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TesteMariana.Dominio.ModuloDisciplina;
+using TesteMariana.Dominio.ModuloMateria;
 using TesteMariana.Dominio.ModuloQuestao;
 
 namespace Marian.Infra.BancoDados.ModuloQuestao
@@ -50,36 +52,80 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
         private const string sqlSelecionarTodos =
            @"SELECT 
-		            [NUMERO], 
-		            [TITULO],
-                    [DISCIPLINA_NUMERO],
-                    [MATERIA_NUMERO] 
+		            Q.[NUMERO], 
+		            Q.[TITULO],
+                    Q.[DISCIPLINA_NUMERO],
+                    Q.[MATERIA_NUMERO],
+
+                    D.[NOME],
+                    
+                    M.[NOME],
+                    M.[SERIE]
 		          
 	            FROM 
-		            [TBQuestao]";
+		            [TBQuestao] AS Q INNER JOIN
+                    [TbDisciplina] AS D
+                ON
+                    D.[NUMERO] = Q.[DISCIPLINA_NUMERO]
+
+                    INNER JOIN [TBMateria] AS M
+                ON 
+                    M.[NUMERO] = Q.[MATERIA_NUMERO]";
 
         private const string sqlSelecionarPorNumero =
-           @"SELECT 
-		            [NUMERO], 
-		            [TITULO],
-                    [DISCIPLINA_NUMERO],
-                    [MATERIA_NUMERO] 
+          @"SELECT 
+		            Q.[NUMERO], 
+		            Q.[TITULO],
+                    Q.[DISCIPLINA_NUMERO],
+                    Q.[MATERIA_NUMERO],
+
+                    D.[NOME],
+                    
+                    M.[NOME],
+                    M.[SERIE]
 		          
 	            FROM 
-		            [TBQuestao]
-                WHERE
-                    [NUMERO] = @NUMERO";
+		            [TBQuestao] AS Q INNER JOIN
+                    [TbDisciplina] AS D
+                ON
+                    D.[NUMERO] = Q.[DISCIPLINA_NUMERO]
 
-        private const string sqlSelecionarItensTarefa =
+                    INNER JOIN [TBMateria] AS M
+                ON 
+                    M.[NUMERO] = Q.[MATERIA_NUMERO]
+                WHERE
+                    M.[NUMERO] = @NUMERO";
+
+        private const string sqlSelecionarAlternativas =
            @"SELECT 
 	            [NUMERO],
-                [TITULO],
-                [CONCLUIDO],
-                [TAREFA_NUMERO]
+                [CORRETA],
+                [RESPOSTA],
+                [QUESTAO_NUMERO] 
               FROM 
 	            [TBAlternativas]
               WHERE 
-	            [TAREFA_NUMERO] = @TAREFA_NUMERO";
+	            [QUESTAO_NUMERO] = @QUESTAO_NUMERO";
+
+        private const string sqlInserirAlternativas =
+            @"INSERT INTO [DBO].[TBITEMTAREFA]
+                (
+		            [CORRETA],
+                    [RESPOSTA],
+                    [QUESTAO_NUMERO] 
+	            )
+                 VALUES
+                (
+		            @CORRETA,
+		            @RESPOSTA,
+		            @QUESTAO_NUMERO		   
+	            ); SELECT SCOPE_IDENTITY();";
+
+        private const string sqlExcluirAlternativa =
+            @"DELETE FROM [TBAlternativa]
+                 WHERE
+                    [NUMERO_QUESTAO] = @NUMERO_QUESTAO";
+
 
         #endregion
 
@@ -96,16 +142,34 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
             SqlCommand comandoInsercao = new SqlCommand(sqlInserir, conexaoComBanco);
 
+            SqlCommand comandoInsercaoAlternativa =
+                new SqlCommand(sqlInserirAlternativas, conexaoComBanco);
+
             ConfigurarParametrosQuestao(novaQuestao, comandoInsercao);
 
             conexaoComBanco.Open();
-            var id = comandoInsercao.ExecuteScalar();
-            novaQuestao.Numero = Convert.ToInt32(id);
-
+            var _id = comandoInsercao.ExecuteScalar();
+            int id = Convert.ToInt32(_id);
+            novaQuestao.Numero = id;
+            foreach (var alternativa in novaQuestao.alternativas)
+            {
+                alternativa.Numero = id;
+                comandoInsercaoAlternativa.Parameters.Clear();
+                ConfigurarParametrosAlternativa(alternativa, comandoInsercaoAlternativa);
+                comandoInsercaoAlternativa.ExecuteScalar();
+            }
             conexaoComBanco.Close();
 
             return resultadoValidacao;
         }
+
+        private void ConfigurarParametrosAlternativa(Alternativas alternativa, SqlCommand comandoInsercaoAlternativa)
+        {
+            comandoInsercaoAlternativa.Parameters.AddWithValue("QUESTAO_NUMERO", alternativa.Numero);
+            comandoInsercaoAlternativa.Parameters.AddWithValue("CORRETA", alternativa.Correta);
+            comandoInsercaoAlternativa.Parameters.AddWithValue("RESPOSTA", alternativa.Resposta);
+        }
+
         public ValidationResult Editar(Questao questao)
         {
             var validador = new ValidadorQuestao();
@@ -119,9 +183,24 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
             SqlCommand comandoEdicao = new SqlCommand(sqlEditar, conexaoComBanco);
 
-            ConfigurarParametrosQuestao(questao, comandoEdicao);
+            SqlCommand comandoExcluirAlternativa = new SqlCommand(sqlExcluirAlternativa, conexaoComBanco);
+            SqlCommand comandoInserirAlternativa = new SqlCommand(sqlInserirAlternativas, conexaoComBanco);
+
 
             conexaoComBanco.Open();
+
+            comandoExcluirAlternativa.Parameters.AddWithValue("NUMERO_QUESTAO", questao.Numero);
+            comandoExcluirAlternativa.ExecuteNonQuery();
+
+            ConfigurarParametrosQuestao(questao, comandoEdicao);
+
+            foreach (var alternativa in questao.alternativas)
+            {
+                alternativa.Numero = questao.Numero;
+                ConfigurarParametrosAlternativa(alternativa, comandoInserirAlternativa);
+                comandoInserirAlternativa.ExecuteNonQuery();
+                comandoInserirAlternativa.Parameters.Clear();
+            }
             comandoEdicao.ExecuteNonQuery();
             conexaoComBanco.Close();
 
@@ -134,9 +213,14 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
             SqlCommand comandoExclusao = new SqlCommand(sqlExcluir, conexaoComBanco);
 
-            comandoExclusao.Parameters.AddWithValue("Numero", questao.Numero);
+            SqlCommand comandoExclusaoAlternativa = new SqlCommand(sqlExcluirAlternativa, conexaoComBanco);
+
+            comandoExclusaoAlternativa.Parameters.AddWithValue("NUMERO_QUESTAO", questao.Numero);
+
+            comandoExclusao.Parameters.AddWithValue("NUMERO", questao.Numero);
 
             conexaoComBanco.Open();
+            comandoExclusaoAlternativa.ExecuteNonQuery();
             int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
 
             var resultadoValidacao = new ValidationResult();
@@ -193,14 +277,35 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
         private static Questao ConverterParaQuestao(SqlDataReader leitorQuestao)
         {
-            int numero = Convert.ToInt32(leitorQuestao["Numero"]);
-            string titulo = Convert.ToString(leitorQuestao["TITULO"]);
 
+            int numeroQuestao = Convert.ToInt32(leitorQuestao["Q.[NUMERO]"]);
+            string tituloQuestao = Convert.ToString(leitorQuestao["Q.[TITULO]"]);
+
+            int numeroDisciplina = Convert.ToInt32(leitorQuestao["Q.[DISCIPLINA_NUMERO]"]);
+            string tituloDisciplina = Convert.ToString(leitorQuestao["D.[NOME]"]);
+
+            int numeroMateria = Convert.ToInt32(leitorQuestao["Q.[MATERIA_NUMERO]"]);
+            string tituloMateria = Convert.ToString(leitorQuestao[" M.[NOME]"]);
+            int serie = Convert.ToInt32(leitorQuestao["M.[SERIE]"]);
 
             var questao = new Questao
             {
-                Numero = numero,
-                Titulo = titulo,
+                Numero = numeroQuestao,
+                Titulo = tituloQuestao,
+
+                disciplina = new Disciplina
+                {
+                    Numero = numeroDisciplina,
+                    Titulo = tituloDisciplina
+                },
+                materia = new Materia
+                {
+                    Numero=numeroMateria,
+                    Titulo=tituloMateria,
+                    Serie = (Serie)serie,
+                },
+                
+                alternativas = new List<Alternativas>()
 
             };
 
