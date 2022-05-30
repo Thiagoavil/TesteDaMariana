@@ -95,6 +95,11 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
                 alternativa.Resposta = textBoxRespostas.Text;
                 alternativas.Add (alternativa);
                 listBox1.Items.Add(alternativa);
+
+                if(checkBoxRespostaCerta.Checked)
+                    alternativa.Correta = true;
+                else
+                    alternativa.Correta = false;
             }
         }
         

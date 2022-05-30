@@ -108,6 +108,7 @@
             this.comboBoxDisciplina.Name = "comboBoxDisciplina";
             this.comboBoxDisciplina.Size = new System.Drawing.Size(151, 28);
             this.comboBoxDisciplina.TabIndex = 6;
+            this.comboBoxDisciplina.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisciplina_SelectedIndexChanged);
             // 
             // comboBoxMateria
             // 

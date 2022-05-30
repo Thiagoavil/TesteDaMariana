@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Dominio", "2- Dominio", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{24BB7347-FC87-4737-A1C2-96DD3B30FC93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteMariana.Dominio", "TesteMariana.Dominio\TesteMariana.Dominio.csproj", "{9C07D8A4-D593-45F4-AAF3-DEC9DCC8949C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteMariana.Dominio", "TesteMariana.Dominio\TesteMariana.Dominio.csproj", "{9C07D8A4-D593-45F4-AAF3-DEC9DCC8949C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arquivos", "Arquivos", "{4E1EE146-8686-4B4F-891B-0C1B38C980D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteMariana.Infra.Arquivos", "TesteMariana.Infra.Arquivos\TesteMariana.Infra.Arquivos.csproj", "{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteMariana.Infra.Arquivos", "TesteMariana.Infra.Arquivos\TesteMariana.Infra.Arquivos.csproj", "{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BancoDeDados", "BancoDeDados", "{D7C9C444-036A-42E0-AA62-39DABB7307F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marian.Infra.BancoDados", "Marian.Infra.BancoDados\Marian.Infra.BancoDados.csproj", "{2AF480E7-CB45-4237-A91F-5ADE37A79F80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,10 @@ Global
 		{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF480E7-CB45-4237-A91F-5ADE37A79F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF480E7-CB45-4237-A91F-5ADE37A79F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF480E7-CB45-4237-A91F-5ADE37A79F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF480E7-CB45-4237-A91F-5ADE37A79F80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,8 @@ Global
 		{9C07D8A4-D593-45F4-AAF3-DEC9DCC8949C} = {9361F94D-B5A4-40C0-99E2-44D4A1D0CC49}
 		{4E1EE146-8686-4B4F-891B-0C1B38C980D3} = {24BB7347-FC87-4737-A1C2-96DD3B30FC93}
 		{BE07E8CA-5ADF-4529-BA66-6DBFAAEF9668} = {4E1EE146-8686-4B4F-891B-0C1B38C980D3}
+		{D7C9C444-036A-42E0-AA62-39DABB7307F8} = {24BB7347-FC87-4737-A1C2-96DD3B30FC93}
+		{2AF480E7-CB45-4237-A91F-5ADE37A79F80} = {D7C9C444-036A-42E0-AA62-39DABB7307F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA3C292D-73AC-4D9C-B533-E82ACC7FA61E}

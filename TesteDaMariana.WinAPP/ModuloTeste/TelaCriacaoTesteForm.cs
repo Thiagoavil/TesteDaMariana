@@ -201,7 +201,9 @@ namespace TesteDaMariana.WinAPP.ModuloTeste
             return Questoes;
         }
 
-
-
+        private void comboBoxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarMaterias(materias);
+        }
     }
 }
