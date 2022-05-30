@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[TBTeste] (
+    [NUMERO] INT           NOT NULL,
+    [TITULO] VARCHAR (100) NOT NULL,
+    PRIMARY KEY CLUSTERED ([NUMERO] ASC)
+);
+
