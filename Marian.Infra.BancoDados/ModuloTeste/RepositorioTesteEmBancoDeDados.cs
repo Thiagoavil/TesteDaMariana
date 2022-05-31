@@ -5,6 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TesteMariana.Dominio.ModuloDisciplina;
+using TesteMariana.Dominio.ModuloMateria;
+using TesteMariana.Dominio.ModuloQuestao;
 using TesteMariana.Dominio.ModuloTeste;
 
 namespace Marian.Infra.BancoDados.ModuloTeste
@@ -132,30 +135,42 @@ namespace Marian.Infra.BancoDados.ModuloTeste
         {
             var validador = new ValidadorTeste();
 
-            var resultadoValidacao = validador.Validate(novoTeste);
+            var resultado = validador.Validate(novoTeste);
 
-            if (resultadoValidacao.IsValid == false)
-                return resultadoValidacao;
+            if (!resultado.IsValid)
+                return resultado;
 
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            SqlConnection conexaoComBanco = new(enderecoBanco);
 
-            SqlCommand comandoInsercao = new SqlCommand(sqlInserir, conexaoComBanco);
+            SqlCommand comandoInsercao = new(sqlInserir, conexaoComBanco); 
 
             ConfigurarParametrosTeste(novoTeste, comandoInsercao);
 
             conexaoComBanco.Open();
-            var id = comandoInsercao.ExecuteScalar();
+
+            var id = comandoInsercao.ExecuteScalar(); 
+
             novoTeste.Numero = Convert.ToInt32(id);
+
+            SqlCommand comandoInserirQuestoes = new(sqlInserirQuestoesTabela, conexaoComBanco);
+
+            foreach (var questao in novoTeste.questoes)
+            {
+                comandoInserirQuestoes.Parameters.Clear();
+                ConfigurarParametroQuestao_Teste(questao, novoTeste, comandoInserirQuestoes);
+                comandoInserirQuestoes.ExecuteNonQuery();
+            }
 
             conexaoComBanco.Close();
 
-            return resultadoValidacao;
+            return resultado;
         }
-        public ValidationResult Editar(Teste questao)
+    
+        public ValidationResult Editar(Teste teste)
         {
             var validador = new ValidadorTeste();
 
-            var resultadoValidacao = validador.Validate(questao);
+            var resultadoValidacao = validador.Validate(teste);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
@@ -164,7 +179,7 @@ namespace Marian.Infra.BancoDados.ModuloTeste
 
             SqlCommand comandoEdicao = new SqlCommand(sqlEditar, conexaoComBanco);
 
-            ConfigurarParametrosTeste(questao, comandoEdicao);
+            ConfigurarParametrosTeste(teste, comandoEdicao);
 
             conexaoComBanco.Open();
             comandoEdicao.ExecuteNonQuery();
@@ -177,21 +192,28 @@ namespace Marian.Infra.BancoDados.ModuloTeste
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
-            SqlCommand comandoExclusao = new SqlCommand(sqlExcluir, conexaoComBanco);
+            SqlCommand comandoExclusaoTeste = new SqlCommand(sqlExcluir, conexaoComBanco);
 
-            comandoExclusao.Parameters.AddWithValue("Numero", teste.Numero);
+            SqlCommand comandoExclusaoNN = new(sqlExcluirTabelaNN, conexaoComBanco);
+
+            comandoExclusaoTeste.Parameters.AddWithValue("NUMERO", teste.Numero);
+
+            comandoExclusaoNN.Parameters.AddWithValue("NUMERO", teste.Numero);
 
             conexaoComBanco.Open();
-            int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
 
-            var resultadoValidacao = new ValidationResult();
+            int numeroRegistrosExcluidos = comandoExclusaoTeste.ExecuteNonQuery();
+
+            var resultado = new ValidationResult();
 
             if (numeroRegistrosExcluidos == 0)
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover o registro"));
+                resultado.Errors.Add(new ValidationFailure("", "Não deu pra deletar"));
+            else
+                comandoExclusaoNN.ExecuteNonQuery();
 
             conexaoComBanco.Close();
 
-            return resultadoValidacao;
+            return resultado;
         }
 
         public List<Teste> SelecionarTodos()
@@ -238,17 +260,42 @@ namespace Marian.Infra.BancoDados.ModuloTeste
 
         private static Teste ConverterParaTeste(SqlDataReader leitorteste)
         {
-            int numero = Convert.ToInt32(leitorteste["Numero"]);
+            int numero = Convert.ToInt32(leitorteste["NUMERO"]);
             string titulo = Convert.ToString(leitorteste["TITULO"]);
+            int quantidadeQuestoes = Convert.ToInt32(leitorteste["QUANTIDADEQUESTOES"]);
+            DateTime dataCriacao = Convert.ToDateTime(leitorteste["DATADECRIACAO"]);
+            bool provao = Convert.ToBoolean(leitorteste["PROVAO"]);
 
+           
+            int numeroDisciplina = Convert.ToInt32(leitorteste["DISCIPLINA_NUMERO"]);
+            string nomeDisciplina = Convert.ToString(leitorteste["DISCIPLINA_NOME"]);
+
+            
+            int numeroMateria = Convert.ToInt32(leitorteste["MATERIA_NUMERO"]);
+            string nomeMateria = Convert.ToString(leitorteste["MATERIA_NOME"]);
+            int serie = Convert.ToInt32(leitorteste["MATERIA_SERIE"]);
 
             var teste = new Teste
             {
                 Numero = numero,
                 Titulo = titulo,
+                QuantidadeDeQuestoes= quantidadeQuestoes,
+                DataDeCriacao= dataCriacao,
+                Provao= provao,
+
+                Disciplina = new Disciplina
+                {
+                    Numero = numeroDisciplina,
+                    Titulo = nomeDisciplina
+                },
+                Materia = new Materia
+                {
+                    Numero = numeroMateria,
+                    Titulo = nomeMateria,
+                    Serie = (Serie)serie,
+                },
 
             };
-
             return teste;
         }
 
@@ -257,6 +304,11 @@ namespace Marian.Infra.BancoDados.ModuloTeste
             comando.Parameters.AddWithValue("Numero", novoTeste.Numero);
             comando.Parameters.AddWithValue("TITULO", novoTeste.Titulo);
 
+        }
+        private void ConfigurarParametroQuestao_Teste(Questao questao, Teste novoTeste, SqlCommand comandoInserirNParaN)
+        {
+            comandoInserirNParaN.Parameters.AddWithValue("TESTE_ID", novoTeste.Numero);
+            comandoInserirNParaN.Parameters.AddWithValue("QUESTAO_ID", questao.Numero);
         }
 
     }
