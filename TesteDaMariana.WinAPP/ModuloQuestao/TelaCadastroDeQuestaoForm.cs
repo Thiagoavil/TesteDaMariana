@@ -46,9 +46,11 @@ namespace TesteDaMariana.WinAPP.ModuloQuestao
             
             comboBoxMateria.Items.Clear();
 
+            Disciplina disciplinaSelecionada = new Disciplina();
+            disciplinaSelecionada = (Disciplina)comboBoxDisciplina.SelectedItem;
             foreach (var item in materias)
             {
-                if(item.disciplina==(Disciplina)comboBoxDisciplina.SelectedItem)
+                if(item.disciplina.Numero == disciplinaSelecionada.Numero)
                 {
                     comboBoxMateria.Items.Add(item);
                 }

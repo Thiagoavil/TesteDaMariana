@@ -21,7 +21,7 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 
         #region Sql Queries
         private const string sqlInserir =
-            @"INSERT INTO [TbDISCIPLINA] 
+            @"INSERT INTO [TBQuestao] 
                 (
                     [TITULO],
                     [DISCIPLINA_NUMERO],
@@ -36,7 +36,7 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
                 );SELECT SCOPE_IDENTITY();";
 
         private const string sqlEditar =
-           @"UPDATE [TbDisciplina]	
+           @"UPDATE [TBQuestao]	
 		        SET
 			        [TITULO],
                     [DISCIPLINA_NUMERO],
@@ -46,7 +46,7 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
 			        [NUMERO] = @NUMERO";
 
         private const string sqlExcluir =
-            @"DELETE FROM [TbDisciplina]
+            @"DELETE FROM [TBQuestao]
 		        WHERE
 			        [NUMERO] = @NUMERO";
 
@@ -54,13 +54,14 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
            @"SELECT 
 		            Q.[NUMERO], 
 		            Q.[TITULO],
-                    Q.[DISCIPLINA_NUMERO],
-                    Q.[MATERIA_NUMERO],
-
-                    D.[NOME],
                     
-                    M.[NOME],
-                    M.[SERIE]
+
+                    D.[NUMERO] AS DISCIPLINA_NUMERO,
+                    D.[NOME] as DISCIPLINA_NOME,
+                    
+                    M.[NUMERO] AS MATERIA_NUMERO,
+                    M.[TITULO] as MATERIA_NOME,
+                    M.[SERIE] AS MATERIA_SERIE
 		          
 	            FROM 
 		            [TBQuestao] AS Q INNER JOIN
@@ -76,13 +77,14 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
           @"SELECT 
 		            Q.[NUMERO], 
 		            Q.[TITULO],
-                    Q.[DISCIPLINA_NUMERO],
-                    Q.[MATERIA_NUMERO],
-
-                    D.[NOME],
                     
-                    M.[NOME],
-                    M.[SERIE]
+
+                    D.[NUMERO] AS DISCIPLINA_NUMERO,
+                    D.[NOME] as DISCIPLINA_NOME,
+                    
+                    M.[NUMERO] AS MATERIA_NUMERO,
+                    M.[TITULO] as MATERIA_NOME,
+                    M.[SERIE] AS MATERIA_SERIE
 		          
 	            FROM 
 		            [TBQuestao] AS Q INNER JOIN
@@ -103,12 +105,12 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
                 [RESPOSTA],
                 [QUESTAO_NUMERO] 
               FROM 
-	            [TBAlternativas]
+	            [TBAlternativa]
               WHERE 
 	            [QUESTAO_NUMERO] = @QUESTAO_NUMERO";
 
         private const string sqlInserirAlternativas =
-            @"INSERT INTO [DBO].[TBITEMTAREFA]
+            @"INSERT INTO [DBO].[TBAlternativa]
                 (
 		            [CORRETA],
                     [RESPOSTA],
@@ -278,15 +280,15 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
         private static Questao ConverterParaQuestao(SqlDataReader leitorQuestao)
         {
 
-            int numeroQuestao = Convert.ToInt32(leitorQuestao["Q.[NUMERO]"]);
-            string tituloQuestao = Convert.ToString(leitorQuestao["Q.[TITULO]"]);
+            int numeroQuestao = Convert.ToInt32(leitorQuestao["NUMERO"]);
+            string tituloQuestao = Convert.ToString(leitorQuestao["TITULO"]);
 
-            int numeroDisciplina = Convert.ToInt32(leitorQuestao["Q.[DISCIPLINA_NUMERO]"]);
-            string tituloDisciplina = Convert.ToString(leitorQuestao["D.[NOME]"]);
+            int numeroDisciplina = Convert.ToInt32(leitorQuestao["DISCIPLINA_NUMERO"]);
+            string tituloDisciplina = Convert.ToString(leitorQuestao["DISCIPLINA_NOME"]);
 
-            int numeroMateria = Convert.ToInt32(leitorQuestao["Q.[MATERIA_NUMERO]"]);
-            string tituloMateria = Convert.ToString(leitorQuestao[" M.[NOME]"]);
-            int serie = Convert.ToInt32(leitorQuestao["M.[SERIE]"]);
+            int numeroMateria = Convert.ToInt32(leitorQuestao["MATERIA_NUMERO"]);
+            string tituloMateria = Convert.ToString(leitorQuestao["MATERIA_NOME"]);
+            int serie = Convert.ToInt32(leitorQuestao["MATERIA_SERIE"]);
 
             var questao = new Questao
             {
@@ -316,8 +318,8 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
         {
             comando.Parameters.AddWithValue("NUMERO", novaQuestao.Numero);
             comando.Parameters.AddWithValue("TITULO", novaQuestao.Titulo);
-            comando.Parameters.AddWithValue("DISCIPLINA_NUMERO", novaQuestao.disciplina);
-            comando.Parameters.AddWithValue("MATERIA_NUMERO", novaQuestao.materia);
+            comando.Parameters.AddWithValue("DISCIPLINA_NUMERO", novaQuestao.disciplina.Numero);
+            comando.Parameters.AddWithValue("MATERIA_NUMERO", novaQuestao.materia.Numero);
 
         }
 
