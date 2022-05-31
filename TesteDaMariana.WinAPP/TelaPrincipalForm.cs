@@ -16,6 +16,7 @@ using TesteDaMariana.WinAPP.Compartilhado;
 using Marian.Infra.BancoDados.ModuloDisciplina;
 using Marian.Infra.BancoDados.ModuloQuestao;
 using Marian.Infra.BancoDados.ModuloTeste;
+using TesteMariana.Dominio.ModuloDisciplina;
 
 namespace TesteDaMariana.WinAPP
 {
@@ -24,6 +25,11 @@ namespace TesteDaMariana.WinAPP
         private ControladorBase controlador;
         private Dictionary<string, ControladorBase> controladores;
         private DataContext contextoDados;
+        RepositorioDisciplinaEmBancoDeDados repositorioDisciplina;
+        RepositorioMateriaEmBancoDeDados repositorioMateria ;
+        RepositorioQuestaoEmBancoDeDados repositorioQuestao;
+        RepositorioTesteEmBancoDeDados repositorioTeste;
+
         public TelaPrincipalForm(DataContext contextoDados)
         {
             InitializeComponent();
@@ -75,7 +81,18 @@ namespace TesteDaMariana.WinAPP
 
         private void materiaMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
+
+            if(disciplinas.Count>0)
+            {
+                ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            }
+            else
+            {
+                AtualizarRodape("Crie uma Disciplina Primeiro");
+            }
+
+            
         }
 
         private void questaoMenuItem_Click(object sender, EventArgs e)
@@ -147,10 +164,10 @@ namespace TesteDaMariana.WinAPP
 
         private void InicializarControladores()
         {
-            var repositorioDisciplina = new RepositorioDisciplinaEmBancoDeDados();
-            var repositorioMateria = new RepositorioMateriaEmBancoDeDados();
-            var repositorioQuestao = new RepositorioQuestaoEmBancoDeDados();
-            var repositorioTeste = new RepositorioTesteEmBancoDeDados();
+            repositorioDisciplina = new RepositorioDisciplinaEmBancoDeDados();
+            repositorioMateria = new RepositorioMateriaEmBancoDeDados();
+            repositorioQuestao = new RepositorioQuestaoEmBancoDeDados();
+            repositorioTeste = new RepositorioTesteEmBancoDeDados();
 
             controladores = new Dictionary<string, ControladorBase>();
 
