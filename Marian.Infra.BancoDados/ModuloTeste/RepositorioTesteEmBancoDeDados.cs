@@ -19,46 +19,112 @@ namespace Marian.Infra.BancoDados.ModuloTeste
 
         #region Sql Queries
         private const string sqlInserir =
-            @"INSERT INTO [TbDISCIPLINA] 
+            @"INSERT INTO [TBTeste] 
                 (
-                    [TITULO]
+                    TITULO,
+                    DISCIPLINA_NUMERO, 
+                    MATERIA_NUMERO, 
+                    PROVAO,
+                    DATADECRIACAO, 
+                    QUANTIDADEQUESTOES
                   
 	            )
 	            VALUES
                 (
-                    @TITULO                   
+                    @TITULO,
+                    @DISCIPLINA_NUMERO, 
+                    @MATERIA_NUMERO, 
+                    @PROVAO,
+                    @DATADECRIACAO, 
+                    @QUANTIDADEQUESTOES
+                                  
                 );SELECT SCOPE_IDENTITY();";
 
+        private const string sqlInserirQuestoesTabela =
+            @"INSERT INTO [TBTESTE_TBQUESTAO]
+                (
+                    TESTE_NUMERO,
+                    QUESTAO_NUMERO
+                )
+                    VALUES
+                (
+                    @TESTE_NUMERO,
+                    @QUESTAO_NUMERO
+                )";
+
         private const string sqlEditar =
-           @"UPDATE [TbDisciplina]	
+           @"UPDATE [TBTESTE]	
 		        SET
-			        [TITULO] = @TITULO,
+			        TITULO = @TITULO,
+                    DISCIPLINA_NUMERO = @DISCIPLINA_NUMERO , 
+                    MATERIA_NUMERO = @MATERIA_NUMERO, 
+                    PROVAO = @PROVAO,
+                    DATADECRIACAO = @DATADECRIACAO, 
+                    QUANTIDADEQUESTOES = @QUANTIDADEQUESTOES
 			       
 		        WHERE
-			        [Numero] = @Numero";
+			        [NUMERO] = @NUMERO";
 
         private const string sqlExcluir =
-            @"DELETE FROM [TbDisciplina]
+            @"DELETE FROM [TBTESTE]
 		        WHERE
-			        [Numero] = @Numero";
+			        [NUMERO] = @NUMERO";
+
+        private const string sqlExcluirTabelaNN =
+            @"DELETE FROM [TBTESTE_TBQUESTAO]
+                WHERE
+                    TESTE_NUMERO = @NUMERO";
 
         private const string sqlSelecionarTodos =
            @"SELECT 
-		            [Numero], 
-		            [TITULO] 
-		          
+		            T.TITULO,
+                    T.PROVAO,
+                    T.DATADECRIACAO, 
+                    T.QUANTIDADEQUESTOES,
+
+                    M.NOME AS MATERIA_NOME,
+                    M.NUMERO AS MATERIA_NUMERO,
+                    M.SERIE AS MATERIA_SERIE,
+
+                    D.NOME AS DISCIPLINA_NOME,
+                    D.NUMERO AS DISCIPLINA_NUMERO
+
 	            FROM 
-		            [TbDisciplina]";
+		            TBTESTE AS T INNER JOIN 
+                    TBDISCIPLINA AS D
+	            ON 
+                    T.DISCIPLINA_NUMERO = D.NUMERO
+
+	                INNER JOIN TB_MATERIA AS M
+	            ON 
+                    T.MATERIA_NUMERO = M.NUMERO";
 
         private const string sqlSelecionarPorNumero =
-           @"SELECT 
-		            [Numero], 
-		            [TITULO] 
-		         
+          @"SELECT 
+		            T.TITULO,
+                    T.PROVAO,
+                    T.DATADECRIACAO, 
+                    T.QUANTIDADEQUESTOES,
+
+                    M.NOME AS MATERIA_NOME,
+                    M.NUMERO AS MATERIA_NUMERO,
+                    M.SERIE AS MATERIA_SERIE,
+
+                    D.NOME AS DISCIPLINA_NOME,
+                    D.NUMERO AS DISCIPLINA_NUMERO
+
 	            FROM 
-		            [TbDisciplina]
-		        WHERE
-                    [Numero] = @Numero";
+		            TBTESTE AS T INNER JOIN 
+                    TBDISCIPLINA AS D
+	            ON 
+                    T.DISCIPLINA_NUMERO = D.NUMERO
+
+	                INNER JOIN TB_MATERIA AS M
+	            ON 
+                    T.MATERIA_NUMERO = M.NUMERO
+
+                WHERE
+                    [NUMERO] = @NUMERO";
 
         #endregion
 
