@@ -57,19 +57,19 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
                     
 
                     D.[NUMERO] AS DISCIPLINA_NUMERO,
-                    D.[NOME] as DISCIPLINA_NOME,
+                    D.[NOME] AS DISCIPLINA_NOME,
                     
                     M.[NUMERO] AS MATERIA_NUMERO,
-                    M.[TITULO] as MATERIA_NOME,
+                    M.[TITULO] AS MATERIA_NOME,
                     M.[SERIE] AS MATERIA_SERIE
 		          
 	            FROM 
-		            [TBQuestao] AS Q INNER JOIN
-                    [TbDisciplina] AS D
+		            [TBQUESTAO] AS Q INNER JOIN
+                    [TBDISCIPLINA] AS D
                 ON
                     D.[NUMERO] = Q.[DISCIPLINA_NUMERO]
 
-                    INNER JOIN [TBMateria] AS M
+                    INNER JOIN [TBMATERIA] AS M
                 ON 
                     M.[NUMERO] = Q.[MATERIA_NUMERO]";
 
@@ -80,19 +80,19 @@ namespace Marian.Infra.BancoDados.ModuloQuestao
                     
 
                     D.[NUMERO] AS DISCIPLINA_NUMERO,
-                    D.[NOME] as DISCIPLINA_NOME,
+                    D.[NOME] AS DISCIPLINA_NOME,
                     
                     M.[NUMERO] AS MATERIA_NUMERO,
-                    M.[TITULO] as MATERIA_NOME,
+                    M.[TITULO] AS MATERIA_NOME,
                     M.[SERIE] AS MATERIA_SERIE
 		          
 	            FROM 
-		            [TBQuestao] AS Q INNER JOIN
-                    [TbDisciplina] AS D
+		            [TBQUESTAO] AS Q INNER JOIN
+                    [TBDISCIPLINA] AS D
                 ON
                     D.[NUMERO] = Q.[DISCIPLINA_NUMERO]
 
-                    INNER JOIN [TBMateria] AS M
+                    INNER JOIN [TBMATERIA] AS M
                 ON 
                     M.[NUMERO] = Q.[MATERIA_NUMERO]
                 WHERE
